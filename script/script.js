@@ -86,7 +86,7 @@ newSection.innerHTML = primaryContent;
 
 main.append(newSection);
 
-// Hamburger Function
+// Hamburger Function - I haven't put a lot of effort into this yet so it doesn't work properly
 
 // Open
 
