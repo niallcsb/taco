@@ -3,12 +3,14 @@ class Review_Link {
     headline,
     subhead,
     link,
-    image
+    image,
+    date
   ) {
     this.headline = headline;
     this.subhead = subhead;
     this.link = link;
     this.image = image;
+    this.date = date;
   }
 }
 

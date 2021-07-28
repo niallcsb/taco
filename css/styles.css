@@ -19,6 +19,7 @@ body{
 	background-color: #1B2021;
 	color: #F4F2F3;
 	font-family: 'Noto Sans', sans-serif;
+	min-width: 280px;
 }
 
 html, body{
@@ -121,10 +122,6 @@ header{
 	display: none;
 }
 
-.firstLink{
-	grid-row: 1 / 4;
-}
-
 /* Footer Styles */
 
 footer{
@@ -201,7 +198,8 @@ header{
 	.mainSection{
 		padding: 1.4em 1.4em 0;
 	}
-		.review{
+
+	.review{
 			height: 25em;
 		}
 
@@ -236,7 +234,7 @@ header{
 		height: 40em;
 	}
 
-	.headline, .subhead{
+	.headline{
 		display: block;
 		margin: .4rem;
 	}
@@ -269,9 +267,18 @@ header{
 		grid-gap: 1.4em;
 	}
 
+	.reviewItem:first-child{
+		grid-row: 1 / 4;
+	}
+
 	.review{
 		height: 100%;
 		margin: 0;
+	}
+
+	.reviewItem:first-child .subhead{
+		display: block;
+		margin: .4rem;
 	}
 }
 
