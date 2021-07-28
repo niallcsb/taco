@@ -23,7 +23,7 @@ reviewArray.forEach((item) => {
 	mainSection.append(reviewItem);
 });
 
-// Hamburger Function
+// Hamburger Function - Please ignore this. I started it when I was delirously tired, fell asleep, and then forgot what I was  doing.
 
 // Open
 
