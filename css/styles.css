@@ -274,8 +274,7 @@ footer li {
 		grid-gap: 1.4em;
 	}
 	.reviewLink:first-child {
-		grid-row: 1 / 4;
-		grid-column: 1 / 3;
+		grid-area: 1 / 1 / 4 / 3;
 	}
 	.review {
 		height: 100%;
