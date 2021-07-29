@@ -11,7 +11,7 @@ mainReviewArray.forEach((item) => {
 	reviewItem.setAttribute("tabindex", "0");
 	reviewItem.innerHTML = `
 			<article class="review" style="background-image:url(${item.image})">
-				<h3 class="reviewDate">${item.date}</h3>
+				<h4 class="reviewDate">${item.date}</h4>
 				<span class="reviewHeadings">
 					<h2 class="headline">${item.headline}</h2>
 					<h3 class="subhead">${item.subhead}</h3>
