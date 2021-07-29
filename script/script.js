@@ -1,14 +1,15 @@
-import reviewArray from "./data.js";
+import mainReviewArray from "./data.js";
 
 // Create Reviews
 
 const mainSection = document.querySelector(".mainSection");
 
-reviewArray.forEach((item) => {
-	const reviewItem = document.createElement("span");
-	reviewItem.classList.add("reviewItem");
+mainReviewArray.forEach((item) => {
+	const reviewItem = document.createElement("a");
+	reviewItem.classList.add("reviewLink");
+	reviewItem.setAttribute("href", `"${item.link}"`);
+	reviewItem.setAttribute("tabindex", "0");
 	reviewItem.innerHTML = `
-		<a class="reviewLink" href="${item.link}" tabindex="0">
 			<article class="review" style="background-image:url(${item.image})">
 				<span class="reviewTitle">
 					<h3 class="reviewTitleHead">${item.date}</h3>
@@ -18,7 +19,6 @@ reviewArray.forEach((item) => {
 					<h3 class="subhead">${item.subhead}</h3>
 				</span>
 			</article>
-		</a>
 	`
 	mainSection.append(reviewItem);
 });
