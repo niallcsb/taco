@@ -111,16 +111,13 @@ header {
 	border-radius: .1em;
 }
 
-.reviewTitle {
+.reviewDate {
 	padding: .4em;
 	position: absolute;
 	top: .4em;
 	right: .4em;
 	background-color: #ED1D20;
 	border-radius: .1em;
-}
-
-.reviewTitleHead {
 	margin: 0;
 }
 
