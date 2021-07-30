@@ -21,6 +21,8 @@ mainReviewArray.forEach((item) => {
 	mainSection.append(reviewItem);
 });
 
+// This below can be ignored for now. I'm trying to do a hover effect on the images of the reviews but don't know what yet.
+
 // document.querySelectorAll(".reviewItem").forEach((item) => {
 // 	addEventListener(
 //   "mouseenter",
@@ -41,7 +43,8 @@ mainReviewArray.forEach((item) => {
 // );
 // });
 
-// Overlay Function
+// Overlay Function. This works now but the nav list in the overlay displays before the background transition ends. 
+// I'd also like to animate the button change somehow but don't know how to start yet lol.
 
 // Create hamburger / x icons
 
@@ -84,7 +87,7 @@ newButton.addEventListener('click', () => {
 	}
 });
 
-// Reset header display
+// Reset header display and height once the window goes to the larger window sizes.
 
 let windowWidth = window.innerWidth;
 
