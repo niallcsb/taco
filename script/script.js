@@ -89,16 +89,19 @@ newButton.addEventListener('click', () => {
 
 // Reset everything when window size changes above 425px
 
-let windowWidth = window.innerWidth;
+let windowWidth;
 
-window.addEventListener('resize', () => {
+setInterval(() => {
+	windowWidth = window.innerWidth;
 	if (windowWidth > 425) {
-		document.querySelector("header").style.removeProperty("height");
-		document.querySelector(".headNav").style.removeProperty("display");
-		newButton.innerHTML = hbBtn;
-		btnStatus = "closed";
-	}
-});
+		document.querySelector("header").removeAttribute('style');
+		document.querySelector(".headNav").removeAttribute('style');
+		if (btnStatus !== "closed"){
+			btnStatus = "closed";
+			newButton.innerHTML = hbBtn;
+		}
+	};
+}, 1);
 
 // Append button to header
 
