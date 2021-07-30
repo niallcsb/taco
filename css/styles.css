@@ -63,7 +63,7 @@ header {
 	width: 100vw;
 	min-width: 280px;
 	z-index: 1;
-	transition: 0.5s;
+	transition: 0.3s;
 }
 
 .title {
@@ -89,6 +89,8 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	font-size: 2.5em;
+	opacity: 0;
+	transition: 0.1s;
 }
 
 .openBtn {
@@ -222,6 +224,7 @@ footer li {
 	.headMenu,
 	.openBtn {
 		display: none;
+		transition: 0s;
 	}
 	.headNav {
 		width: 85%;
@@ -234,6 +237,8 @@ footer li {
 		list-style: none;
 		padding: 0;
 		font-size: 1em;
+		opacity: 1;
+		transition: 0s;
 	}
 	/* Main Styles */
 	.mainSection {
