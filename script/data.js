@@ -36,6 +36,6 @@ const fourthReview = new Review_Link(
 	"July 07, 2021"
 )
 
-const reviewArray = [firstReview, secondReview, thirdReview, fourthReview];
+const mainReviewArray = [firstReview, secondReview, thirdReview, fourthReview];
 
-export default reviewArray;
+export default mainReviewArray;
