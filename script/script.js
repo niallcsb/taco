@@ -7,7 +7,7 @@ const mainSection = document.querySelector(".mainSection");
 mainReviewArray.forEach((item) => {
 	const reviewItem = document.createElement("a");
 	reviewItem.classList.add("reviewLink");
-	reviewItem.setAttribute("href", `"${item.link}"`);
+	reviewItem.setAttribute("href", `${item.link}`);
 	reviewItem.setAttribute("tabindex", "0");
 	reviewItem.innerHTML = `
 			<article class="review" style="background-image:url(${item.image})">
