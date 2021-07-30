@@ -7,4 +7,4 @@ Pretty basic for now. It's only the home page and I'm just working on getting it
 
 Needs to be opened in a live environment so that the JS generated reviews will populate properly
 
-https://main.d3gffoluxe8gos.amplifyapp.com/
+Site hosted on Amplify: https://main.d3gffoluxe8gos.amplifyapp.com/
