@@ -21,8 +21,6 @@ mainReviewArray.forEach((item) => {
 	mainSection.append(reviewItem);
 });
 
-// This below can be ignored for now. I'm trying to do a hover effect on the images of the reviews but don't know what yet.
-
 // document.querySelectorAll(".reviewItem").forEach((item) => {
 // 	addEventListener(
 //   "mouseenter",
@@ -43,8 +41,7 @@ mainReviewArray.forEach((item) => {
 // );
 // });
 
-// Overlay Function. This works now but the nav list in the overlay displays before the background transition ends. 
-// I'd also like to animate the button change somehow but don't know how to start yet lol.
+// Overlay Function
 
 // Create hamburger / x icons
 
@@ -75,17 +72,24 @@ let btnStatus = true;
 
 const header = document.querySelector("header");
 const headNav = document.querySelector(".headNav");
+const headNavList = document.querySelector(".headNavList");
 
 newButton.addEventListener('click', () => {
 	if (btnStatus === true) {
 		btnStatus = false;
 		header.style.height = "100vh";
 		headNav.style.display = "block";
+		header.addEventListener('transitionend', () => {
+			headNavList.style.opacity = "1";
+		});
 		newButton.innerHTML = xBtn;
 	} else if (btnStatus === false) {
 		btnStatus = true;
 		header.style.height = "3em";
 		headNav.style.display = "none";
+		header.addEventListener('transitionend', () => {
+			headNavList.style.opacity = "0";
+		});
 		newButton.innerHTML = hbBtn;
 	}
 });
@@ -101,6 +105,7 @@ setInterval(() => {
 		// document.querySelector(".headNav").style.removeProperty("display");
 		header.removeAttribute('style');
 		headNav.removeAttribute('style');
+		headNavList.removeAttribute('style');
 		if (btnStatus !== true){
 			newButton.innerHTML = hbBtn;
 			btnStatus = true;
