@@ -87,14 +87,16 @@ newButton.addEventListener('click', () => {
 	}
 });
 
-// Reset header display and height once the window goes to the larger window sizes.
+// Reset everything when window size changes above 425px
 
 let windowWidth = window.innerWidth;
 
 window.addEventListener('resize', () => {
-	if (windowWidth < 425) {
+	if (windowWidth > 425) {
 		document.querySelector("header").style.removeProperty("height");
 		document.querySelector(".headNav").style.removeProperty("display");
+		newButton.innerHTML = hbBtn;
+		btnStatus = "closed";
 	}
 });
 
