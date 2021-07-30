@@ -278,7 +278,7 @@ footer li {
 	}
 	/* Footer Styles */
 	footer {
-		min-height: calc(100% - 950px);
+		min-height: calc(100vh - 950px);
 	}
 }
 
