@@ -69,41 +69,45 @@ const xBtn = `
 const newButton = document.createElement("button");
 newButton.classList.add("openBtn");
 newButton.innerHTML = hbBtn;
-let btnStatus = "closed"
+let btnStatus = true;
 
 // Function to open and close the overlay
 
+const header = document.querySelector("header");
+const headNav = document.querySelector(".headNav");
+
 newButton.addEventListener('click', () => {
-	if (btnStatus === "closed") {
-		btnStatus = "open";
-		document.querySelector("header").style.height = "100vh";
-		document.querySelector(".headNav").style.display = "block";
+	if (btnStatus === true) {
+		btnStatus = false;
+		header.style.height = "100vh";
+		headNav.style.display = "block";
 		newButton.innerHTML = xBtn;
-	} else if (btnStatus === "open") {
-		btnStatus = "closed";
-		document.querySelector("header").style.height = "3em";
-		document.querySelector(".headNav").style.display = "none";
+	} else if (btnStatus === false) {
+		btnStatus = true;
+		header.style.height = "3em";
+		headNav.style.display = "none";
 		newButton.innerHTML = hbBtn;
 	}
 });
 
-// Reset everything when window size changes above 425px
+// Reset everything on display change
 
 let windowWidth;
 
 setInterval(() => {
 	windowWidth = window.innerWidth;
 	if (windowWidth > 425) {
-		document.querySelector("header").removeAttribute('style');
-		document.querySelector(".headNav").removeAttribute('style');
-		if (btnStatus !== "closed"){
-			btnStatus = "closed";
+		// document.querySelector("header").style.removeProperty("height");
+		// document.querySelector(".headNav").style.removeProperty("display");
+		header.removeAttribute('style');
+		headNav.removeAttribute('style');
+		if (btnStatus !== true){
 			newButton.innerHTML = hbBtn;
+			btnStatus = true;
 		}
 	};
 }, 1);
 
 // Append button to header
 
-const headNav = document.querySelector("header");
-headNav.append(newButton);
+header.append(newButton);
