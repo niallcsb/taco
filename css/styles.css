@@ -56,7 +56,7 @@ a:focus {
 header {
 	background-color: #1B2021;
 	display: grid;
-	grid-template: 1fr 6fr / repeat(5, 1fr);
+	grid-template: 3em / repeat(5, 1fr);
 	position: fixed;
 	top: 0;
 	height: 3em;
@@ -73,11 +73,14 @@ header {
 	font-family: 'Lobster', cursive;
 	margin-left: .693em;
 	grid-area: 1 / 1 / 2 / 4;
+	align-self: center;
 }
 
 .headNav {
 	display: none;
 	grid-column: 2 / span 3;
+	justify-content: center;
+	align-items: center;
 }
 
 .headNavList {
@@ -91,6 +94,10 @@ header {
 	font-size: 2.5em;
 	opacity: 0;
 	transition: 0.1s;
+}
+
+.home {
+	display: none;
 }
 
 .openBtn {
@@ -113,7 +120,7 @@ header {
 
 /* Main Styles */
 
-.mainSection {
+.mainSection, .archiveSection {
 	margin-top: 3em;
 	padding: 0 1.4em;
 }
@@ -234,6 +241,7 @@ footer li {
 	.headNavList {
 		flex-direction: row;
 		justify-content: space-around;
+		align-items: baseline;
 		list-style: none;
 		padding: 0;
 		font-size: 1em;
@@ -241,7 +249,7 @@ footer li {
 		transition: 0s;
 	}
 	/* Main Styles */
-	.mainSection {
+	.mainSection, .archiveSection {
 		margin-top: 0;
 		padding: 1.4em 1.4em 0;
 	}
@@ -301,7 +309,7 @@ footer li {
 		height: 80vh;
 		max-height: 750px;
 	}
-	.mainSection {
+	.mainSection, .archiveSection {
 		padding: 1.4em;
 		height: 100%;
 		display: grid;
@@ -309,14 +317,14 @@ footer li {
 		grid-gap: 1.4em;
 		grid-auto-rows: 1fr;
 	}
-	.reviewLink:first-child {
+	.mainSection .reviewLink:first-child {
 		grid-area: 1 / 1 / 4 / 3;
 	}
 	.review {
 		height: 100%;
 		margin: 0;
 	}
-	.reviewLink:first-child .subhead {
+	.mainSection .reviewLink:first-child .subhead {
 		display: block;
 		margin: .4rem;
 	}
