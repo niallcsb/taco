@@ -80,7 +80,7 @@ header {
 	display: none;
 	grid-column: 2 / span 3;
 	justify-content: center;
-	align-items: center;
+	align-items: baseline;
 }
 
 .headNavList {
