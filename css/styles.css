@@ -1,14 +1,13 @@
-/* Colours */
-
-
-/* black: #1B2021
+/*
+Colours -
+black: #1B2021
 white: #F4F2F3
 red: #ED1D20
 yellow: #ffcc00
 grey: #3E4A51
 light grey: #62747F
-blue: #1F51FF */
-
+blue: #1F51FF
+*/
 
 /* General Styles */
 
@@ -40,7 +39,6 @@ a {
 	transition: 0.5s;
 	text-decoration: none;
 }
-
 
 /* a:visited {
 	color: #1F51FF;
@@ -117,11 +115,14 @@ header {
 	margin-right: 1em;
 }
 
-
 /* Main Styles */
 
-.mainSection, .archiveSection {
-	margin-top: 3em;
+.mainContent {
+		margin-top: 3em;
+}
+
+.mainSection,
+.archiveSection {
 	padding: 0 1.4em;
 }
 
@@ -159,7 +160,6 @@ header {
 .subhead {
 	display: none;
 }
-
 
 /* Footer Styles */
 
@@ -199,7 +199,6 @@ footer li {
 	margin: 0;
 }
 
-
 /* Media Queries */
 
 @media only screen and (min-width: 320px) {
@@ -207,8 +206,6 @@ footer li {
 	.review {
 		height: 20em;
 	}
-
-	/* Header Styles */
 }
 
 @media only screen and (min-width: 425px) {
@@ -249,8 +246,11 @@ footer li {
 		transition: 0s;
 	}
 	/* Main Styles */
-	.mainSection, .archiveSection {
+	.mainContent{
 		margin-top: 0;
+	}
+	.mainSection,
+	.archiveSection {
 		padding: 1.4em 1.4em 0;
 	}
 	.review {
@@ -309,7 +309,8 @@ footer li {
 		height: 80vh;
 		max-height: 750px;
 	}
-	.mainSection, .archiveSection {
+	.mainSection,
+	.archiveSection {
 		padding: 1.4em;
 		height: 100%;
 		display: grid;

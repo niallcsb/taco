@@ -4,9 +4,13 @@ import {archiveArray, mainArray} from "./data.js";
 const header = document.querySelector("header");
 const headNav = document.querySelector(".headNav");
 const headNavList = document.querySelector(".headNavList");
-const mainSection = document.querySelector(".mainSection");
+const headArray = [header, headNav, headNavList];
 const homeLink = document.querySelector(".home");
 const archiveLink = document.querySelector(".archive");
+const storeLink = document.querySelector(".store");
+const socialLink = document.querySelector(".social");
+const randomLink = document.querySelector(".random");
+const navArray = [homeLink, archiveLink, storeLink, socialLink, randomLink];
 const newButton = document.createElement("button");
 const hbBtn = `
 	<svg class="headMenu" xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 24 24" width="3em" fill="#ED1D20">
@@ -20,11 +24,13 @@ const xBtn = `
 		<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
 	</svg>
 `
+const mainSection = document.querySelector(".mainSection");
 let windowWidth;
+let btnStatus = true;
 
-// Declare Functions
+// Functions
 // Populate reviews from the arrays
-function sectionRefresh(array) {
+const sectionRefresh = function(array) {
 	mainSection.innerHTML = ``;
 	array.forEach((item) => {
 		const reviewItem = document.createElement("a");
@@ -44,43 +50,80 @@ function sectionRefresh(array) {
 };
 
 // Reset mobile overlay
-function resetOverlay() {
-	header.removeAttribute('style');
-	headNav.removeAttribute('style');
-	headNavList.removeAttribute('style');
+const resetOverlay = function() {
+	headArray.forEach((item) => {
+		item.removeAttribute('style')
+	});
 	if (btnStatus !== true){
 		newButton.innerHTML = hbBtn;
 		btnStatus = true;
 	};
 };
 
-// Loads the homepage version of the array on page load. Will need to change/work on this
+// Sets up the CSS for the content that we want to show on the page
+const contentSetup = function(name, link) {
+	mainSection.innerHTML = ``;
+	navArray.forEach((item) => {
+		if (item.style.display === "none") {
+			item.removeAttribute('style');
+		}
+	});
+	mainSection.className = `${name}`;
+	link.style.display = "none";
+	 if (link !== homeLink) {
+		 homeLink.style.display = "block";
+	 } else {
+		 link.removeAttribute('style');
+	 }
+	resetOverlay();
+}
+
+// Loads the content for each page on page load depending on the hash. More work still to be done
 window.addEventListener('load', (event) => {
-	sectionRefresh(mainArray);
+	if (location.hash === "#/archive") {
+		contentSetup("archiveSection", archiveLink);
+		sectionRefresh(archiveArray);
+	} else if (location.hash === "#/store") {
+		contentSetup("storeSection", storeLink);
+	} else if (location.hash === "#/socials") {
+		contentSetup("socialSection", socialLink);
+	} else if (location.hash === "#/random") {
+		contentSetup("randomSection", randomLink);
+	} else {
+		sectionRefresh(mainArray);
+	}
 });
 
 // Changes content to the archive content when archive button is pressed
 archiveLink.addEventListener('click', () => {
-	mainSection.className = "archiveSection";
+	contentSetup("archiveSection", archiveLink);
 	sectionRefresh(archiveArray);
-	archiveLink.style.display = "none";
-	homeLink.style.display = "block";
-	resetOverlay();
+});
+
+// Changes content to the store content when store button is pressed
+storeLink.addEventListener('click', () => {
+	contentSetup("storeSection", storeLink);
+});
+
+// Changes content to the social content when social button is pressed
+socialLink.addEventListener('click', () => {
+	contentSetup("socialSection", socialLink);
+});
+
+// Changes content to the random content when random button is pressed
+randomLink.addEventListener('click', () => {
+	contentSetup("randomSection", randomLink);
 });
 
 // Changes content to the homepage content when home button is pressed
 homeLink.addEventListener('click', () => {
-	mainSection.className = "mainSection";
+	contentSetup("mainSection", homeLink);
 	sectionRefresh(mainArray);
-	homeLink.style.display = "none";
-	archiveLink.style.display = "block";
-	resetOverlay();
 });
 
 // Turn hamburger/X icons into a button and append it to the header
 newButton.classList.add("openBtn");
 newButton.innerHTML = hbBtn;
-let btnStatus = true;
 header.append(newButton);
 
 // Function to open and close the overlay
