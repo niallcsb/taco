@@ -61,7 +61,13 @@ header {
 	width: 100vw;
 	min-width: 280px;
 	z-index: 1;
-	transition: 0.3s;
+	transition: 0.4s;
+}
+
+.homeLink {
+	grid-area: 1 / 1 / 2 / 4;
+	align-self: center;
+	margin-left: 1.4em;
 }
 
 .title {
@@ -69,34 +75,52 @@ header {
 	font-size: 2em;
 	color: #ffcc00;
 	font-family: 'Lobster', cursive;
-	margin-left: .693em;
-	grid-area: 1 / 1 / 2 / 4;
-	align-self: center;
 }
 
 .headNav {
-	display: none;
+	display: flex;
+	grid-row: -1;
 	grid-column: 2 / span 3;
 	justify-content: center;
 	align-items: baseline;
+	padding: 1em;
 }
 
 .headNavList {
 	height: 60%;
 	list-style: none;
 	padding: 0;
+	margin: 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	font-size: 2.5em;
 	opacity: 0;
-	transition: 0.1s;
+	transition: 0.4s;
 }
 
-.home {
+.breadcrumb {
+	margin: 0 auto;
+	padding: 0;
+	width: 60%;
+	list-style: none;
 	display: none;
+  text-transform: capitalize;
 }
+
+.breadcrumb p {
+	margin: 0;
+	color: #ffcc00;
+}
+
+/* .home {
+	display: none;
+} */
+
+/* .article {
+	display: none;
+} */
 
 .openBtn {
 	border: none;
@@ -122,7 +146,7 @@ header {
 }
 
 .mainSection,
-.archiveSection {
+.articlesSection {
 	padding: 0 1.4em;
 }
 
@@ -213,15 +237,18 @@ footer li {
 	header {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: space-around;
 		align-items: center;
 		height: auto;
 		position: relative;
 		transition: 0s;
 	}
+	.homeLink {
+		margin-left: 0;
+		align-self: auto;
+	}
 	.title {
 		font-size: 4em;
-		margin-left: 0;
 		align-self: auto;
 		display: inline-block;
 	}
@@ -245,12 +272,15 @@ footer li {
 		opacity: 1;
 		transition: 0s;
 	}
+	.articles {
+		display: block;
+	}
 	/* Main Styles */
 	.mainContent{
 		margin-top: 0;
 	}
 	.mainSection,
-	.archiveSection {
+	.articlesSection {
 		padding: 1.4em 1.4em 0;
 	}
 	.review {
@@ -301,16 +331,13 @@ footer li {
 		height: 20vh;
 		max-height: 200px;
 	}
-	.title {
-		margin-bottom: .4em;
-	}
 	/* Main Styles */
 	.mainContent {
 		height: 80vh;
 		max-height: 750px;
 	}
 	.mainSection,
-	.archiveSection {
+	.articlesSection {
 		padding: 1.4em;
 		height: 100%;
 		display: grid;

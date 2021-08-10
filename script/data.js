@@ -4,90 +4,90 @@ import Review_Link from "./Review_Link.js"
 
 // Create arrays
 
-// First is the archive array for all Reviews
+// First is the article array for all Reviews
 
-const archiveArray = [
+const articleArray = [
 	new Review_Link(
 		"Grand Electric",
 		"This Parkdale based taco joint covers all the bases, great tacos, great margs, great atmosphere",
-		`#`,
+		"#/articles/1",
 		"../images/grandelectric.jpeg",
 		"July 28, 2021"
 	),
 	new Review_Link(
 		"El Rey Mezcal Bar",
 		"This taco place has a squid ink taco that will blow your socks off",
-		"#",
+		"#/articles/2",
 		"../images/elrey.jpeg",
 		"July 21, 2021"
 	),
 	new Review_Link(
 		"Seven Lives",
 		"Don't let the queue put you off, you need to try these take out tacos",
-		"#",
+		"#/articles/3",
 		"../images/sevenlives.jpeg",
 		"July 14, 2021"
 	),
 	new Review_Link(
 		"Good Hombres",
 		"Make your taco sets delivered to your door!",
-		"#",
+		"#/articles/4",
 		"../images/goodhombres.jpeg",
 		"July 07, 2021"
 	),
 	new Review_Link(
 		"Mi Taco Taqueria",
 		"This Parkdale based taco joint covers all the bases, great tacos, great margs, great atmosphere",
-		`#`,
+		"#/articles/5",
 		"../images/grandelectric.jpeg",
 		"June 30, 2021"
 	),
 	new Review_Link(
 		"Playa Cabana",
 		"This taco place has a squid ink taco that will blow your socks off",
-		"#",
+		"#/articles/6",
 		"../images/elrey.jpeg",
 		"June 23, 2021"
 	),
 	new Review_Link(
 		"El Nahual Tacos",
 		"Don't let the queue put you off, you need to try these take out tacos",
-		"#",
+		"#/articles/7",
 		"../images/sevenlives.jpeg",
 		"June 16, 2021"
 	),
 	new Review_Link(
 		"Campechano Taquería",
 		"Make your taco sets delivered to your door!",
-		"#",
+		"#/articles/8",
 		"../images/goodhombres.jpeg",
 		"June 09, 2021"
 	),
 	new Review_Link(
 		"La Carnita",
 		"This Parkdale based taco joint covers all the bases, great tacos, great margs, great atmosphere",
-		`#`,
+		"#/articles/9",
 		"../images/grandelectric.jpeg",
 		"June 02, 2021"
 	),
 	new Review_Link(
 		"Wilbur Mexicana",
 		"This taco place has a squid ink taco that will blow your socks off",
-		"#",
+		"#/articles/10",
 		"../images/elrey.jpeg",
 		"May 26, 2021"
 	),
 	new Review_Link(
 		"Tacos El Asador",
 		"Don't let the queue put you off, you need to try these take out tacos",
-		"#",
+		"#/articles/11",
 		"../images/sevenlives.jpeg",
 		"May 19, 2021"
 	),
 	new Review_Link(
 		"El Catrin Destileria",
 		"Make your taco sets delivered to your door!",
-		"#",
+		"#/articles/12",
 		"../images/goodhombres.jpeg",
 		"May 12, 2021"
 	)
@@ -98,9 +98,9 @@ const archiveArray = [
 const mainArray = [];
 
 for (let i = 0; i < 4; i++) {
-	mainArray[i] = archiveArray[i]
+	mainArray[i] = articleArray[i]
 };
 
 // Export both arrays
 
-export {archiveArray, mainArray};
+export {articleArray, mainArray};
