@@ -10,14 +10,14 @@ const articleArray = [
 	new Review_Link(
 		"Grand Electric",
 		"This Parkdale based taco joint covers all the bases, great tacos, great margs, great atmosphere",
-		"#/articles/GrandElectric",
+		"#/articles/1",
 		"../images/grandelectric.jpeg",
 		"July 28, 2021"
 	),
 	new Review_Link(
 		"El Rey Mezcal Bar",
 		"This taco place has a squid ink taco that will blow your socks off",
-		"#/articles/ElReyMezcalBar",
+		"#/articles/2",
 		"../images/elrey.jpeg",
 		"July 21, 2021"
 	),
