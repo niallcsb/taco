@@ -29,13 +29,13 @@ const breadcrumbStarter = `
 `;
 const mainSection = document.querySelector(".mainSection");
 let locationString;
+let articleValidator;
 let windowWidth;
 let btnStatus = true;
 
 // Functions
-// Populate reviews from the arrays
+// Populate article links from the arrays
 const arrayRefresh = function(array) {
-	mainSection.innerHTML = ``;
 	array.forEach((item) => {
 		const reviewItem = document.createElement("a");
 		reviewItem.classList.add("reviewLink");
@@ -52,6 +52,32 @@ const arrayRefresh = function(array) {
 		mainSection.append(reviewItem);
 	});
 };
+
+const articleSetup = function() {
+	mainSection.innerHTML = ``;
+	articleValidator = location.hash.toString().substring(location.hash.toString().lastIndexOf("/") + 1 , location.hash.toString().length);
+	const articleBody = document.createElement("article");
+	articleBody.classList.add("articleBody");
+	articleBody.innerHTML = `
+		<img src="${articleArray[articleValidator].image}" width="100%" alt="${articleArray[articleValidator].imageAlt}">
+		<h1 class="articleHeadline">${articleArray[articleValidator].headline}</h1>
+		<h2 class="articleSubHead">${articleArray[articleValidator].subhead}</h2>
+		<h2 class="articleDate">${articleArray[articleValidator].date}</h2>
+		<p>asdfsadf dsf adsf sdfa dfasdf asdf asdfas dfasd fsadfasd asdfa dsfasdf sdf asdfa
+		sdfads dfasdfsdf sdafasdf adsfa sdfsd fsdfa sdfa sdfasdfdsf asdf sdaf adsfa sdfasdf
+		asdfsad sadfasd sdfs sdafasdf sadf asd asdf asdfsd f sadfa dsfsdf dsfsdf ssd</p>
+		<p>asdfsadf dsf adsf sdfa dfasdf asdf asdfas dfasd fsadfasd asdfa dsfasdf sdf asdfa
+		sdfads dfasdfsdf sdafasdf adsfa sdfsd fsdfa sdfa sdfasdfdsf asdf sdaf adsfa sdfasdf
+		asdfsad sadfasd sdfs sdafasdf sadf asd asdf asdfsd f sadfa dsfsdf dsfsdf ssd</p>
+		<p>asdfsadf dsf adsf sdfa dfasdf asdf asdfas dfasd fsadfasd asdfa dsfasdf sdf asdfa
+		sdfads dfasdfsdf sdafasdf adsfa sdfsd fsdfa sdfa sdfasdfdsf asdf sdaf adsfa sdfasdf
+		asdfsad sadfasd sdfs sdafasdf sadf asd asdf asdfsd f sadfa dsfsdf dsfsdf ssd</p>
+		<p>asdfsadf dsf adsf sdfa dfasdf asdf asdfas dfasd fsadfasd asdfa dsfasdf sdf asdfa
+		sdfads dfasdfsdf sdafasdf adsfa sdfsd fsdfa sdfa sdfasdfdsf asdf sdaf adsfa sdfasdf
+		asdfsad sadfasd sdfs sdafasdf sadf asd asdf asdfsd f sadfa dsfsdf dsfsdf ssd</p>
+	`;
+	mainSection.append(articleBody);
+}
 
 // Reset mobile overlay
 const resetOverlay = function() {
@@ -72,11 +98,13 @@ const contentSetup = function(name) {
 }
 
 // Add breadcrumbs to the nav. This sucks but it works-ish... for now.
+// This function just resets the breadcrumbs
 const resetBreadcrumb = function() {
 	breadcrumb.innerHTML = (breadcrumbStarter + `>`);
 	breadcrumb.style.display = "flex";
 };
 
+//This function adds the breadcrumbs dynamically to the nav
 const breadcrumbSetup = function() {
 	locationString = location.hash.toString().substring(2).split('/');
 	windowWidth = window.innerWidth;
@@ -139,6 +167,8 @@ window.addEventListener('load', (event) => {
 		contentSetup("socialSection");
 	} else if (location.hash == "#/random") {
 		contentSetup("randomSection");
+	} else if (location.hash.includes("articles/")) {
+		articleSetup();
 	} else {
 		arrayRefresh(mainArray);
 	};
@@ -159,7 +189,9 @@ window.addEventListener('hashchange', () => {
 		contentSetup("randomSection");
 	} else if (location.hash == "") {
 		arrayRefresh(mainArray);
-	};
+	} else if (location.hash.includes("articles/")) {
+		articleSetup();
+	}
 });
 
 // Changes content to the article content when article button is pressed
