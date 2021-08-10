@@ -25,7 +25,7 @@ const xBtn = `
 `;
 const breadcrumb = document.querySelector(".breadcrumb");
 const breadcrumbStarter = `
-	<li class="homeBcLink"><a class="homeLink" href="">Home</a></li>
+	<li class="homeBcLink"><a class="homeLink" href="">Home&nbsp;</a></li>
 `;
 const mainSection = document.querySelector(".mainSection");
 let locationString;
@@ -86,7 +86,7 @@ const breadcrumbSetup = function() {
 			const bcItem = document.createElement("li");
 			bcItem.classList.add(`${locationString}BcLink`);
 			bcItem.innerHTML = `
-				<p class="${locationString}Link">${locationString}</p>
+				<p class="${locationString}Link">&nbsp;${locationString}</p>
 			`,
 			breadcrumb.append(bcItem);
 		};
@@ -98,7 +98,7 @@ const breadcrumbSetup = function() {
 				const bcItem = document.createElement("li");
 				bcItem.classList.add(`${locationString[i]}BcLink`);
 				bcItem.innerHTML = `
-					<a class="${locationString[i]}Link" href="#/${locationString[i]}">${locationString[i]}</a>
+					<a class="${locationString[i]}Link" href="#/${locationString[i]}">&nbsp;${locationString[i]}&nbsp;</a>
 				`,
 				breadcrumb.append(bcItem, `>`);
 				i++;
@@ -107,7 +107,7 @@ const breadcrumbSetup = function() {
 				const bcItem = document.createElement("li");
 				bcItem.classList.add(`${locationString[i]}BcLink`);
 				bcItem.innerHTML = `
-					<p class="${locationString[i]}Link">${locationString[i]}</p>
+					<p class="${locationString[i]}Link">&nbsp;${locationString[i]}</p>
 				`,
 				breadcrumb.append(bcItem);
 			}

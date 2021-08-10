@@ -109,6 +109,10 @@ header {
   text-transform: capitalize;
 }
 
+.breadcrumb ul {
+font-size: 2em;
+}
+
 .breadcrumb p {
 	margin: 0;
 	color: #ffcc00;
