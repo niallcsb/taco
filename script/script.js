@@ -28,7 +28,6 @@ const breadcrumbStarter = `
 	<li class="homeBcLink"><a class="homeLink" href="">Home</a></li>
 `;
 const mainSection = document.querySelector(".mainSection");
-let currentLocation;
 let locationString;
 let windowWidth;
 let btnStatus = true;
@@ -79,8 +78,7 @@ const resetBreadcrumb = function() {
 };
 
 const breadcrumbSetup = function() {
-	currentLocation = location.hash;
-	locationString = currentLocation.toString().substring(2).split('/');
+	locationString = location.hash.toString().substring(2).split('/');
 	windowWidth = window.innerWidth;
 	if (locationString.length == 1) {
 		if (windowWidth > 425 && location.hash != "") {
@@ -100,7 +98,7 @@ const breadcrumbSetup = function() {
 				const bcItem = document.createElement("li");
 				bcItem.classList.add(`${locationString[i]}BcLink`);
 				bcItem.innerHTML = `
-					<a class="${locationString[i]}Link" href="${currentLocation}">${locationString[i]}</a>
+					<a class="${locationString[i]}Link" href="#/${locationString[i]}">${locationString[i]}</a>
 				`,
 				breadcrumb.append(bcItem, `>`);
 				i++;
