@@ -81,7 +81,6 @@ const resetBreadcrumb = function() {
 const breadcrumbSetup = function() {
 	currentLocation = location.hash;
 	locationString = currentLocation.toString().substring(2).split('/');
-	console.log(locationString);
 	windowWidth = window.innerWidth;
 	if (locationString.length == 1) {
 		if (windowWidth > 425 && location.hash != "") {
