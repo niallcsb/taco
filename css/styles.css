@@ -40,6 +40,10 @@ a {
 	text-decoration: none;
 }
 
+p {
+	margin: 1.4em 0;
+}
+
 /* a:visited {
 	color: #1F51FF;
 } */
@@ -118,14 +122,6 @@ font-size: 2em;
 	color: #ffcc00;
 }
 
-/* .home {
-	display: none;
-} */
-
-/* .article {
-	display: none;
-} */
-
 .openBtn {
 	border: none;
 	padding: 0;
@@ -150,7 +146,8 @@ font-size: 2em;
 }
 
 .mainSection,
-.articlesSection {
+.articlesSection,
+.individualArticle {
 	padding: 0 1.4em;
 }
 
@@ -163,12 +160,17 @@ font-size: 2em;
 	margin-bottom: 1.4em;
 }
 
+.reviewLink:hover,
+.reviewLink:focus {
+	box-shadow: 0 0 5px 2px #ffcc00;
+	transition: 0.4s;
+}
+
 .reviewHeadings {
 	margin: 0 .4em;
 	position: absolute;
 	bottom: .4em;
 	background-color: #ED1D20;
-	border-radius: .1em;
 }
 
 .reviewDate {
@@ -177,8 +179,14 @@ font-size: 2em;
 	top: .4em;
 	right: .4em;
 	background-color: #ED1D20;
-	border-radius: .1em;
 	margin: 0;
+}
+
+.review,
+.reviewLink,
+.reviewHeadings,
+.reviewDate {
+	border-radius: .1em;
 }
 
 .headline {
@@ -187,6 +195,10 @@ font-size: 2em;
 
 .subhead {
 	display: none;
+}
+
+.articleImg {
+	border: .4em solid #ED1D20;
 }
 
 /* Footer Styles */
@@ -262,7 +274,7 @@ footer li {
 		transition: 0s;
 	}
 	.headNav {
-		width: 85%;
+		width: 85vw;
 		background-color: #ED1D20;
 		display: block;
 	}
@@ -284,7 +296,8 @@ footer li {
 		margin-top: 0;
 	}
 	.mainSection,
-	.articlesSection {
+	.articlesSection,
+	.individualArticle {
 		padding: 1.4em 1.4em 0;
 	}
 	.review {
@@ -292,6 +305,10 @@ footer li {
 	}
 	.headline {
 		font-size: 2em;
+	}
+	.individualArticle {
+		width: 85vw;
+		margin: 0 auto;
 	}
 	/* Footer Styles */
 	.footNav {
@@ -313,7 +330,7 @@ footer li {
 @media only screen and (min-width: 768px) {
 	/* Header Styles */
 	.headNav {
-		width: 70%;
+		width: 70vw;
 	}
 	/* Main Styles */
 	.review {
@@ -322,6 +339,9 @@ footer li {
 	.headline {
 		display: block;
 		margin: .4rem;
+	}
+	.individualArticle {
+		width: 70vw;
 	}
 	/* Footer Styles */
 	footer {
@@ -336,21 +356,26 @@ footer li {
 		max-height: 200px;
 	}
 	/* Main Styles */
-	.mainContent {
+	.mainSection {
 		height: 80vh;
 		max-height: 750px;
 	}
 	.mainSection,
 	.articlesSection {
 		padding: 1.4em;
-		height: 100%;
 		display: grid;
 		grid-template: repeat(3, 1fr) / repeat(3, 1fr);
 		grid-gap: 1.4em;
 		grid-auto-rows: 1fr;
 	}
+	.individualArticle {
+		padding: 1.4em;
+	}
 	.mainSection .reviewLink:first-child {
 		grid-area: 1 / 1 / 4 / 3;
+	}
+	.articlesSection .reviewLink {
+		height: 13em;
 	}
 	.review {
 		height: 100%;

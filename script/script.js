@@ -25,7 +25,7 @@ const xBtn = `
 `;
 const breadcrumb = document.querySelector(".breadcrumb");
 const breadcrumbStarter = `
-	<li class="homeBcLink"><a class="homeLink" href="">Home&nbsp;</a></li>
+	<li class="homeBcItem"><a class="homeBcLink" href="">Home</a></li>
 `;
 const mainSection = document.querySelector(".mainSection");
 let locationString;
@@ -53,13 +53,16 @@ const arrayRefresh = function(array) {
 	});
 };
 
+// This sets up the actual articles
 const articleSetup = function() {
 	mainSection.innerHTML = ``;
-	articleValidator = location.hash.toString().substring(location.hash.toString().lastIndexOf("/") + 1 , location.hash.toString().length);
+	mainSection.className = "individualArticle";
+	let currentLocation = location.hash.toString();
+	articleValidator = currentLocation.substring(currentLocation.lastIndexOf("/") + 1 , currentLocation.length);
 	const articleBody = document.createElement("article");
 	articleBody.classList.add("articleBody");
 	articleBody.innerHTML = `
-		<img src="${articleArray[articleValidator].image}" width="100%" alt="${articleArray[articleValidator].imageAlt}">
+		<img class="articleImg" src="${articleArray[articleValidator].image}" width="100%" height="20vh" alt="${articleArray[articleValidator].headline}: ${articleArray[articleValidator].subhead}">
 		<h1 class="articleHeadline">${articleArray[articleValidator].headline}</h1>
 		<h2 class="articleSubHead">${articleArray[articleValidator].subhead}</h2>
 		<h2 class="articleDate">${articleArray[articleValidator].date}</h2>
@@ -77,6 +80,7 @@ const articleSetup = function() {
 		asdfsad sadfasd sdfs sdafasdf sadf asd asdf asdfsd f sadfa dsfsdf dsfsdf ssd</p>
 	`;
 	mainSection.append(articleBody);
+	window.scrollTo(0, 0);
 }
 
 // Reset mobile overlay
@@ -97,10 +101,10 @@ const contentSetup = function(name) {
 	resetOverlay();
 }
 
-// Add breadcrumbs to the nav. This sucks but it works-ish... for now.
+// Add breadcrumbs to the nav
 // This function just resets the breadcrumbs
 const resetBreadcrumb = function() {
-	breadcrumb.innerHTML = (breadcrumbStarter + `>`);
+	breadcrumb.innerHTML = (breadcrumbStarter + `&nbsp;>&nbsp;`);
 	breadcrumb.style.display = "flex";
 };
 
@@ -112,9 +116,9 @@ const breadcrumbSetup = function() {
 		if (windowWidth > 425 && location.hash != "") {
 			resetBreadcrumb();
 			const bcItem = document.createElement("li");
-			bcItem.classList.add(`${locationString}BcLink`);
+			bcItem.classList.add(`${locationString}BcItem`);
 			bcItem.innerHTML = `
-				<p class="${locationString}Link">&nbsp;${locationString}</p>
+				<p class="${locationString}BcCurrent">${locationString}</p>
 			`,
 			breadcrumb.append(bcItem);
 		};
@@ -124,18 +128,18 @@ const breadcrumbSetup = function() {
 			let i = 0;
 			do {
 				const bcItem = document.createElement("li");
-				bcItem.classList.add(`${locationString[i]}BcLink`);
+				bcItem.classList.add(`${locationString[i]}BcItem`);
 				bcItem.innerHTML = `
-					<a class="${locationString[i]}Link" href="#/${locationString[i]}">&nbsp;${locationString[i]}&nbsp;</a>
+					<a class="${locationString[i]}BcLink" href="#/${locationString[i]}">${locationString[i]}&nbsp;</a>
 				`,
 				breadcrumb.append(bcItem, `>`);
 				i++;
 			} while (i != (locationString.length - 1));
 			if (i == (locationString.length - 1)) {
 				const bcItem = document.createElement("li");
-				bcItem.classList.add(`${locationString[i]}BcLink`);
+				bcItem.classList.add(`${locationString[i]}BcItem`);
 				bcItem.innerHTML = `
-					<p class="${locationString[i]}Link">&nbsp;${locationString[i]}</p>
+					<p class="${locationString[i]}BcCurrent">&nbsp;${articleArray[locationString[i]].headline}</p>
 				`,
 				breadcrumb.append(bcItem);
 			}
