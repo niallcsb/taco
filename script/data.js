@@ -1,97 +1,180 @@
 import Review_Link from "./Review_Link.js"
 
-// headline, subhead, link, image, imageAlt, date
+// headline, subhead, link, image, date, section, subsection
 
 // Create arrays
 
 // First is the article array for all Reviews
-
+// Link and date intentionally left blank for now. Updated later on.
 const articleArray = [
 	new Review_Link(
 		"Grand Electric",
 		"This Parkdale based taco joint covers all the bases, great tacos, great margs, great atmosphere",
-		`#/articles/0`,
+		"",
 		"../images/grandelectric.jpeg",
-		"July 28, 2021"
+		1627444800000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"El Rey Mezcal Bar",
 		"This taco place has a squid ink taco that will blow your socks off",
-		"#/articles/1",
+		"",
 		"../images/elrey.jpeg",
-		"July 21, 2021"
+		1626840000000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"Seven Lives",
 		"Don't let the queue put you off, you need to try these take out tacos",
-		"#/articles/2",
+		"",
 		"../images/sevenlives.jpeg",
-		"July 14, 2021"
+		1626235200000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"Good Hombres",
 		"Make your taco sets delivered to your door!",
-		"#/articles/3",
+		"",
 		"../images/goodhombres.jpeg",
-		"July 07, 2021"
+		1625630400000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"Mi Taco Taqueria",
 		"This Parkdale based taco joint covers all the bases, great tacos, great margs, great atmosphere",
-		"#/articles/4",
+		"",
 		"../images/grandelectric.jpeg",
-		"June 30, 2021"
+		1625025600000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"Playa Cabana",
 		"This taco place has a squid ink taco that will blow your socks off",
-		"#/articles/5",
+		"",
 		"../images/elrey.jpeg",
-		"June 23, 2021"
+		1624420800000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"El Nahual Tacos",
 		"Don't let the queue put you off, you need to try these take out tacos",
-		"#/articles/6",
+		"",
 		"../images/sevenlives.jpeg",
-		"June 16, 2021"
+		1623816000000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"Campechano Taquería",
 		"Make your taco sets delivered to your door!",
-		"#/articles/7",
+		"",
 		"../images/goodhombres.jpeg",
-		"June 09, 2021"
+		1623211200000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"La Carnita",
 		"This Parkdale based taco joint covers all the bases, great tacos, great margs, great atmosphere",
-		"#/articles/8",
+		"",
 		"../images/grandelectric.jpeg",
-		"June 02, 2021"
+		1622606400000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"Wilbur Mexicana",
 		"This taco place has a squid ink taco that will blow your socks off",
-		"#/articles/9",
+		"",
 		"../images/elrey.jpeg",
-		"May 26, 2021"
+		1622001600000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"Tacos El Asador",
 		"Don't let the queue put you off, you need to try these take out tacos",
-		"#/articles/10",
+		"",
 		"../images/sevenlives.jpeg",
-		"May 19, 2021"
+		1621396800000,
+		"",
+		"articles",
+		""
 	),
 	new Review_Link(
 		"El Catrin Destileria",
 		"Make your taco sets delivered to your door!",
-		"#/articles/11",
+		"",
 		"../images/goodhombres.jpeg",
-		"May 12, 2021"
+		1620792000000,
+		"",
+		"articles",
+		""
 	)
 ];
+
+// Format some of the parameters in the objects.
+articleArray.forEach((item) => {
+	let urlUpdate = item.headline.replace(/\s/g,'').toLowerCase();
+	item.link = `#/articles/${item.id}/${urlUpdate}`;
+	let dateUpdate = new Date(item.id);
+	let month;
+	switch (dateUpdate.getMonth()) {
+		case 0:
+			month = "January";
+			break;
+		case 1:
+			month = "February";
+			break;
+		case 2:
+			month = "March";
+			break;
+		case 3:
+			month = "April";
+			break;
+		case 4:
+			month = "May";
+			break;
+		case 5:
+			month = "June";
+			break;
+		case 6:
+			month = "July";
+			break;
+		case 7:
+			month = "August";
+			break;
+		case 8:
+			month = "September";
+			break;
+		case 9:
+			month = "October";
+			break;
+		case 10:
+			month = "November";
+			break;
+		case 11:
+			month = "December";
+			break;
+	};
+	item.date = `${month} ${dateUpdate.getDate()}, ${dateUpdate.getFullYear()}`;
+});
 
 // Second is the main array for the most recent reviews showing on the home page
 

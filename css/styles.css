@@ -82,7 +82,7 @@ header {
 }
 
 .headNav {
-	display: flex;
+	display: none;
 	grid-row: -1;
 	grid-column: 2 / span 3;
 	justify-content: center;
@@ -91,16 +91,15 @@ header {
 }
 
 .headNavList {
+	display: flex;
 	height: 60%;
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
 	font-size: 2.5em;
-	opacity: 0;
 	transition: 0.4s;
 }
 
@@ -114,23 +113,30 @@ header {
 }
 
 .breadcrumb ul {
-font-size: 2em;
+	font-size: 2em;
 }
 
-.breadcrumb p {
+.breadcrumb li {
+	display: flex;
+}
+
+.bcCurrent {
 	margin: 0;
 	color: #ffcc00;
+}
+
+.bcArrow {
+	margin: 0 4px;
 }
 
 .openBtn {
 	border: none;
 	padding: 0;
 	font-size: 1rem;
-	line-height: 1;
+	height: 100%;
 	background: transparent;
 	-webkit-appearance: none;
 	cursor: pointer;
-	align-self: baseline;
 	justify-self: end;
 	grid-area: 1 / 5;
 }
@@ -158,12 +164,6 @@ font-size: 2em;
 	position: relative;
 	height: 15em;
 	margin-bottom: 1.4em;
-}
-
-.reviewLink:hover,
-.reviewLink:focus {
-	box-shadow: 0 0 5px 2px #ffcc00;
-	transition: 0.4s;
 }
 
 .reviewHeadings {
@@ -274,6 +274,7 @@ footer li {
 		transition: 0s;
 	}
 	.headNav {
+		display: flex;
 		width: 85vw;
 		background-color: #ED1D20;
 		display: block;
@@ -285,7 +286,6 @@ footer li {
 		list-style: none;
 		padding: 0;
 		font-size: 1em;
-		opacity: 1;
 		transition: 0s;
 	}
 	.articles {
@@ -380,6 +380,11 @@ footer li {
 	.review {
 		height: 100%;
 		margin: 0;
+	}
+	.reviewLink:hover,
+	.reviewLink:focus {
+		box-shadow: 0 0 5px 2px #ffcc00;
+		transition: 0.4s;
 	}
 	.mainSection .reviewLink:first-child .subhead {
 		display: block;

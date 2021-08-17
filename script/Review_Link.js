@@ -4,13 +4,19 @@ class Review_Link {
     subhead,
     link,
     image,
-    date
+    id,
+    date,
+    section,
+    subsection
   ) {
     this.headline = headline;
     this.subhead = subhead;
     this.link = link;
     this.image = image;
+    this.id = id;
     this.date = date;
+    this.section = section;
+    this.subsection = subsection;
   }
 }
 
