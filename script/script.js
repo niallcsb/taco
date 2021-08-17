@@ -134,42 +134,41 @@ const validateBreadcrumb = function(stringArray) {
 
 //This function adds the breadcrumbs dynamically to the nav
 const breadcrumbSetup = function() {
-	const bcArrow = document.createElement("p");
-	bcArrow.classList.add("bcArrow");
-	bcArrow.innerHTML = ">";
 	let locationString = location.hash.toString().substring(2).split('/');
 	windowWidth = window.innerWidth;
-	resetBreadcrumb();
-	if (locationString.length == 1) {
-		if (windowWidth > 425 && location.hash != "") {
+	if (windowWidth > 425) {
+		resetBreadcrumb();
+		if (locationString.length == 1 && location.hash != "") {
+			if (location.hash != "") {
+				const bcItem = document.createElement("li");
+				bcItem.classList.add("currentBcItem");
+				bcItem.innerHTML = `
+					<p class="bcCurrent">${locationString}</p>
+				`,
+					breadcrumb.append(bcItem);
+			};
+		} else if (locationString.length > 1) {
+			let validatedArticle = validateBreadcrumb(locationString);
+			let articleValidator = articleArray
 			const bcItem = document.createElement("li");
-			bcItem.classList.add("currentBcItem");
-			bcItem.innerHTML = `
-				<p class="bcCurrent">${locationString}</p>
-			`,
-				breadcrumb.append(bcItem);
+			bcItem.classList.add(`${validatedArticle.section}BcItem`);
+			if (validatedArticle.subsection == "") {
+				bcItem.innerHTML = `
+						<a class="${validatedArticle.section}BcLink" href="#/${validatedArticle.section}">${validatedArticle.section}</a>
+						<p class="bcArrow">></p>
+						<p class="bcCurrent">${validatedArticle.headline}</p>
+					`;
+			} else if (validatedArticle.subsection != "") {
+				bcItem.innerHTML = `
+						<a class="${validatedArticle.section}BcLink" href="#/${validatedArticle.section}">${validatedArticle.section}</a>
+						<p class="bcArrow">></p>
+						<a class="${validatedArticle.subsection}BcLink" href="#/${validatedArticle.subsection}">${validatedArticle.subsection}</a>
+						<p class="bcArrow">></p>
+						<p class="bcCurrent">${validatedArticle.headline}</p>
+					`;
+			};
+			breadcrumb.append(bcItem);
 		};
-	} else if (locationString.length > 1) {
-		let validatedArticle = validateBreadcrumb(locationString);
-		let articleValidator = articleArray
-		const bcItem = document.createElement("li");
-		bcItem.classList.add(`${validatedArticle.section}BcItem`);
-		if (windowWidth > 425 && location.hash != "" && validatedArticle.subsection == "") {
-			bcItem.innerHTML = `
-				<a class="${validatedArticle.section}BcLink" href="#/${validatedArticle.section}">${validatedArticle.section}</a>
-				<p class="bcArrow">></p>
-				<p class="bcCurrent">${validatedArticle.headline}</p>
-			`;
-		} else if (windowWidth > 425 && location.hash != "" && validatedArticle.subsection != "") {
-			bcItem.innerHTML = `
-				<a class="${validatedArticle.section}BcLink" href="#/${validatedArticle.section}">${validatedArticle.section}</a>
-				<p class="bcArrow">></p>
-				<a class="${validatedArticle.subsection}BcLink" href="#/${validatedArticle.subsection}">${validatedArticle.subsection}</a>
-				<p class="bcArrow">></p>
-				<p class="bcCurrent">${validatedArticle.headline}</p>
-			`;
-		};
-		breadcrumb.append(bcItem);
 	};
 };
 
@@ -186,6 +185,9 @@ window.addEventListener('load', (event) => {
 	windowWidth = window.innerWidth;
 	breadcrumbSetup();
 	window.scrollTo(0, 0);
+	if (windowWidth < 425) {
+		btnMaker();
+	};
 	if (windowWidth < 425 && location.hash == "") {
 			location.hash = "#/articles";
 			contentSetup("articlesSection");
@@ -260,9 +262,15 @@ homeLink.addEventListener('click', () => {
 });
 
 // Turn hamburger/X icons into a button and append it to the header
-newButton.classList.add("openBtn");
-newButton.innerHTML = hbBtn;
-header.append(newButton);
+const btnMaker = function() {
+	newButton.classList.add("openBtn");
+	newButton.innerHTML = hbBtn;
+	header.append(newButton);
+};
+
+const btnRemove = function() {
+	newButton.remove();
+}
 
 // Function to open and close the overlay
 newButton.addEventListener('click', () => {
@@ -280,10 +288,12 @@ newButton.addEventListener('click', () => {
 window.addEventListener('resize', () => {
 	windowWidth = window.innerWidth;
 	if (windowWidth > 425) {
+		btnRemove();
 		resetOverlay();
 		breadcrumbSetup();
 	} else if (windowWidth < 425) {
 		breadcrumb.removeAttribute('style');
+		btnMaker();
 	}
 });
 

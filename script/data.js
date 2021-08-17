@@ -130,12 +130,10 @@ const articleArray = [
 ];
 
 // Format some of the parameters in the objects.
-articleArray.forEach((item) => {
-	let urlUpdate = item.headline.replace(/\s/g,'').toLowerCase();
-	item.link = `#/articles/${item.id}/${urlUpdate}`;
-	let dateUpdate = new Date(item.id);
+// Converts the month from a number to a string
+const monthString = function(date) {
 	let month;
-	switch (dateUpdate.getMonth()) {
+	switch (date.getMonth()) {
 		case 0:
 			month = "January";
 			break;
@@ -173,6 +171,14 @@ articleArray.forEach((item) => {
 			month = "December";
 			break;
 	};
+	return month;
+};
+
+articleArray.forEach((item) => {
+	let urlUpdate = item.headline.replace(/\s/g,'').toLowerCase();
+	item.link = `#/articles/${item.id}/${urlUpdate}`;
+	let dateUpdate = new Date(item.id);
+	let month = monthString(dateUpdate);
 	item.date = `${month} ${dateUpdate.getDate()}, ${dateUpdate.getFullYear()}`;
 });
 
