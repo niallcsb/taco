@@ -3,7 +3,8 @@ import {articleArray, mainArray} from "./data.js";
 // Declare Variables
 const header = document.querySelector("header");
 const headNav = document.querySelector(".headNav");
-const headArray = [header, headNav];
+const headNavList = document.querySelector(".headNavList");
+const headArray = [header, headNav, headNavList];
 const homeLink = document.querySelector(".title");
 const articleLink = document.querySelector(".articlesLink");
 const storeLink = document.querySelector(".store");
@@ -41,7 +42,7 @@ const arrayRefresh = function(array) {
 		reviewItem.classList.add("reviewLink");
 		reviewItem.setAttribute("href", `${item.link}`);
 		reviewItem.innerHTML = `
-				<article class="review" style="background-image:url(${item.image})">
+				<article class="review" style="background-image:url(${item.image_169})">
 					<h4 class="reviewDate">${item.date}</h4>
 					<span class="reviewHeadings">
 						<h2 class="headline">${item.headline}</h2>
@@ -53,15 +54,19 @@ const arrayRefresh = function(array) {
 	});
 };
 
-const validateArticle = function() {
-	let currentLocation = location.hash.toString();
-	let initValidator = currentLocation.match(/\d+/)[0].substring(0, (currentLocation.length));
-	initValidator = parseInt(initValidator, 10);
-	function arrayValidator(item) {
-		return item.id === initValidator;
-	}
-	let articleValidator = articleArray.find(arrayValidator);
-	return articleValidator;
+// This validates which object is being called and viewed on the page
+const validator = function(stringArray) {
+	let locationString = location.hash.toString().substring(2).split('/');
+	let validator;
+	locationString.forEach((item) => {
+		let initValidator = parseInt(item, 10);
+		if (Number.isFinite(initValidator) == true) {
+			validator = initValidator;
+		};
+	});
+	let validatedArticle = articleArray.find(({id}) => id == validator);
+	let returnResults = [validatedArticle, locationString];
+	return returnResults;
 };
 
 // This sets up the actual articles
@@ -69,13 +74,18 @@ const articleSetup = function() {
 	mainSection.innerHTML = ``;
 	mainSection.className = "individualArticle";
 	const articleBody = document.createElement("article");
-	let articleValidator = validateArticle();
+	let validatedArticle = validator()[0];
 	articleBody.classList.add("articleBody");
 	articleBody.innerHTML = `
-		<img class="articleImg" src="${articleValidator.image}" width="100%" height="20vh" alt="${articleValidator.headline}: ${articleValidator.subhead}">
-		<h1 class="articleHeadline">${articleValidator.headline}</h1>
-		<h2 class="articleSubHead">${articleValidator.subhead}</h2>
-		<h2 class="articleDate">${articleValidator.date}</h2>
+		<figure class="articleFigure">
+			<img class="articleImg" src="${validatedArticle.imageArticle}" width="100%" alt="">
+			<figcaption class="articleCaption">${validatedArticle.caption}</figcaption>
+		</figure>
+		<span class="articleHeading">
+			<h1 class="articleHeadline">${validatedArticle.headline}</h1>
+			<h2 class="articleDate">${validatedArticle.date}</h2>
+		</span>
+		<h2 class="articleSubHead">${validatedArticle.subhead}</h2>
 		<p>asdfsadf dsf adsf sdfa dfasdf asdf asdfas dfasd fsadfasd asdfa dsfasdf sdf asdfa
 		sdfads dfasdfsdf sdafasdf adsfa sdfsd fsdfa sdfa sdfasdfdsf asdf sdaf adsfa sdfasdf
 		asdfsad sadfasd sdfs sdafasdf sadf asd asdf asdfsd f sadfa dsfsdf dsfsdf ssd</p>
@@ -120,39 +130,26 @@ const resetBreadcrumb = function() {
 	};
 };
 
-const validateBreadcrumb = function(stringArray) {
-	let validator;
-	stringArray.forEach((item) => {
-		let initValidator = parseInt(item, 10);
-		if (Number.isFinite(initValidator) == true) {
-			validator = initValidator;
-		};
-	});
-	let validatedArticle = articleArray.find(({id}) => id === validator);
-	return validatedArticle;
-	};
-
 //This function adds the breadcrumbs dynamically to the nav
 const breadcrumbSetup = function() {
-	let locationString = location.hash.toString().substring(2).split('/');
+	let returnResults = validator();
+	let validatedArticle = returnResults[0];
+	let locationString = returnResults[1];
+	const bcItem = document.createElement("li");
 	windowWidth = window.innerWidth;
 	if (windowWidth > 425) {
 		resetBreadcrumb();
 		if (locationString.length == 1 && location.hash != "") {
 			if (location.hash != "") {
-				const bcItem = document.createElement("li");
 				bcItem.classList.add("currentBcItem");
 				bcItem.innerHTML = `
 					<p class="bcCurrent">${locationString}</p>
-				`,
-					breadcrumb.append(bcItem);
+				`;
+				breadcrumb.append(bcItem);
 			};
 		} else if (locationString.length > 1) {
-			let validatedArticle = validateBreadcrumb(locationString);
-			let articleValidator = articleArray
-			const bcItem = document.createElement("li");
-			bcItem.classList.add(`${validatedArticle.section}BcItem`);
 			if (validatedArticle.subsection == "") {
+				bcItem.classList.add(`${validatedArticle.section}BcItem`);
 				bcItem.innerHTML = `
 						<a class="${validatedArticle.section}BcLink" href="#/${validatedArticle.section}">${validatedArticle.section}</a>
 						<p class="bcArrow">></p>
@@ -272,12 +269,23 @@ const btnRemove = function() {
 	newButton.remove();
 }
 
+const delay = (seconds) =>
+	new Promise((resolves) =>
+		setTimeout(resolves, seconds * 1000)
+);
+
+const overlayWait = async () => {
+	await delay(0.3);
+	headNavList.style.opacity = "1";
+};
+
 // Function to open and close the overlay
 newButton.addEventListener('click', () => {
 	if (btnStatus == true) {
 		btnStatus = false;
 		header.style.height = "100vh";
 		headNav.style.display = "flex";
+		overlayWait();
 		newButton.innerHTML = xBtn;
 	} else if (btnStatus == false) {
 		resetOverlay();

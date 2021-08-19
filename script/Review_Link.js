@@ -3,7 +3,9 @@ class Review_Link {
     headline,
     subhead,
     link,
-    image,
+    image_169,
+    imageArticle,
+    caption,
     id,
     date,
     section,
@@ -12,7 +14,9 @@ class Review_Link {
     this.headline = headline;
     this.subhead = subhead;
     this.link = link;
-    this.image = image;
+    this.image_169 = image_169;
+    this.imageArticle = imageArticle;
+    this.caption = caption;
     this.id = id;
     this.date = date;
     this.section = section;

@@ -91,6 +91,7 @@ header {
 }
 
 .headNavList {
+	opacity: 0;
 	display: flex;
 	height: 60%;
 	list-style: none;
@@ -197,8 +198,37 @@ header {
 	display: none;
 }
 
+.articleFigure{
+	margin: 0;
+}
+
 .articleImg {
 	border: .4em solid #ED1D20;
+}
+
+.articleCaption {
+	font-size: .8em;
+}
+
+.articleHeading {
+	margin: .4em 0;
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+	align-items: center;
+}
+
+.articleHeadline {
+	margin: 0;
+	font-size: 2em;
+}
+
+.articleDate {
+	margin: 0;
+	font-size: 1em;
+}
+
+.articleSubHead {
+	font-size: 1.3em;
 }
 
 /* Footer Styles */
@@ -280,6 +310,7 @@ footer li {
 		display: block;
 	}
 	.headNavList {
+		opacity: 1;
 		flex-direction: row;
 		justify-content: space-around;
 		align-items: baseline;
