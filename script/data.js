@@ -5,7 +5,7 @@ import Review_Link from "./Review_Link.js"
 // Create arrays
 
 // First is the article array for all Reviews
-// Link and date intentionally left blank for now. Updated later on.
+// Link and date intentionally left blank for now. Updated through a function later on.
 const articleArray = [
 	new Review_Link(
 		"Grand Electric",

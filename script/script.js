@@ -1,3 +1,5 @@
+'use strict'
+
 import {articleArray, mainArray} from "./data.js";
 
 // Declare Variables
@@ -36,7 +38,7 @@ let btnStatus = true;
 
 // Functions
 // Populate article links from the arrays
-const arrayRefresh = function(array) {
+const arrayRefresh = (array) => {
 	array.forEach((item) => {
 		const reviewItem = document.createElement("a");
 		reviewItem.classList.add("reviewLink");
@@ -55,7 +57,7 @@ const arrayRefresh = function(array) {
 };
 
 // This validates which object is being called and viewed on the page
-const validator = function(stringArray) {
+const validator = (stringArray) => {
 	let locationString = location.hash.toString().substring(2).split('/');
 	let validator;
 	locationString.forEach((item) => {
@@ -70,22 +72,21 @@ const validator = function(stringArray) {
 };
 
 // This sets up the actual articles
-const articleSetup = function() {
+const articleSetup = (id = validator()[0]) => {
 	mainSection.innerHTML = ``;
 	mainSection.className = "individualArticle";
 	const articleBody = document.createElement("article");
-	let validatedArticle = validator()[0];
 	articleBody.classList.add("articleBody");
 	articleBody.innerHTML = `
 		<figure class="articleFigure">
-			<img class="articleImg" src="${validatedArticle.imageArticle}" width="100%" alt="">
-			<figcaption class="articleCaption">${validatedArticle.caption}</figcaption>
+			<img class="articleImg" src="${id.imageArticle}" width="100%" alt="">
+			<figcaption class="articleCaption">${id.caption}</figcaption>
 		</figure>
 		<span class="articleHeading">
-			<h1 class="articleHeadline">${validatedArticle.headline}</h1>
-			<h2 class="articleDate">${validatedArticle.date}</h2>
+			<h1 class="articleHeadline">${id.headline}</h1>
+			<h2 class="articleDate">${id.date}</h2>
 		</span>
-		<h2 class="articleSubHead">${validatedArticle.subhead}</h2>
+		<h2 class="articleSubHead">${id.subhead}</h2>
 		<p>asdfsadf dsf adsf sdfa dfasdf asdf asdfas dfasd fsadfasd asdfa dsfasdf sdf asdfa
 		sdfads dfasdfsdf sdafasdf adsfa sdfsd fsdfa sdfa sdfasdfdsf asdf sdaf adsfa sdfasdf
 		asdfsad sadfasd sdfs sdafasdf sadf asd asdf asdfsd f sadfa dsfsdf dsfsdf ssd</p>
@@ -103,8 +104,15 @@ const articleSetup = function() {
 	window.scrollTo(0, 0);
 }
 
+// This calls a random article from the array
+const randomArticle = () => {
+	let article = articleArray[Math.floor(Math.random()*articleArray.length)];
+	location.hash = article.link;
+	articleSetup(article);
+}
+
 // Reset mobile overlay
-const resetOverlay = function() {
+const resetOverlay = () => {
 	headArray.forEach((item) => {
 		item.removeAttribute('style')
 	});
@@ -115,7 +123,7 @@ const resetOverlay = function() {
 };
 
 // Sets up the CSS for the content that we want to show on the page
-const contentSetup = function(name) {
+const contentSetup = (name) => {
 	mainSection.innerHTML = ``;
 	mainSection.className = `${name}`;
 	resetOverlay();
@@ -123,54 +131,57 @@ const contentSetup = function(name) {
 
 // Add breadcrumbs to the nav
 // This function just resets the breadcrumbs
-const resetBreadcrumb = function() {
+const resetBreadcrumb = () => {
 	if (location.hash != "") {
 		breadcrumb.innerHTML = (breadcrumbStarter);
 		breadcrumb.style.display = "flex";
 	};
 };
 
+// This creates the li for the breadcrumb and appends them to the html
+const bcPopulator = (array) => {
+	let i;
+	for(i = 0; i < array.length - 1; i++) {
+		const bcItem = document.createElement("li");
+		bcItem.classList.add(`${array[i]}BcItem`);
+		bcItem.innerHTML = `
+			<a class="${array[i]}BcLink" href="#/${array[i]}">${array[i]}</a>
+			<p class="bcArrow">></p>
+		`;
+		breadcrumb.append(bcItem);
+	};
+	if (i = array.length) {
+		const bcItem = document.createElement("li");
+		bcItem.classList.add("currentBcItem");
+		bcItem.innerHTML = `
+			<p class="bcCurrent">${array[i-1]}</p>
+		`;
+		breadcrumb.append(bcItem);
+	}
+}
+
 //This function adds the breadcrumbs dynamically to the nav
-const breadcrumbSetup = function() {
+const breadcrumbSetup = () => {
 	let returnResults = validator();
-	let validatedArticle = returnResults[0];
 	let locationString = returnResults[1];
-	const bcItem = document.createElement("li");
 	windowWidth = window.innerWidth;
-	if (windowWidth > 425) {
-		resetBreadcrumb();
-		if (locationString.length == 1 && location.hash != "") {
-			if (location.hash != "") {
-				bcItem.classList.add("currentBcItem");
-				bcItem.innerHTML = `
-					<p class="bcCurrent">${locationString}</p>
-				`;
-				breadcrumb.append(bcItem);
-			};
-		} else if (locationString.length > 1) {
-			if (validatedArticle.subsection == "") {
-				bcItem.classList.add(`${validatedArticle.section}BcItem`);
-				bcItem.innerHTML = `
-						<a class="${validatedArticle.section}BcLink" href="#/${validatedArticle.section}">${validatedArticle.section}</a>
-						<p class="bcArrow">></p>
-						<p class="bcCurrent">${validatedArticle.headline}</p>
-					`;
-			} else if (validatedArticle.subsection != "") {
-				bcItem.innerHTML = `
-						<a class="${validatedArticle.section}BcLink" href="#/${validatedArticle.section}">${validatedArticle.section}</a>
-						<p class="bcArrow">></p>
-						<a class="${validatedArticle.subsection}BcLink" href="#/${validatedArticle.subsection}">${validatedArticle.subsection}</a>
-						<p class="bcArrow">></p>
-						<p class="bcCurrent">${validatedArticle.headline}</p>
-					`;
-			};
-			breadcrumb.append(bcItem);
+	resetBreadcrumb();
+	if (locationString.length == 1 && location.hash != "") {
+		bcPopulator(locationString);
+	} else if (locationString.length > 1) {
+		let validatedArticle = returnResults[0];
+		let bcArray
+		if (validatedArticle.subsection == "") {
+			bcArray = [validatedArticle.section, validatedArticle.headline];
+		} else {
+			bcArray = [validatedArticle.section, validatedArticle.subsection, validatedArticle.headline];
 		};
+		bcPopulator(bcArray);
 	};
 };
 
 // Handles clicks on nav links
-const navClick = function(hash) {
+const navClick = (hash) => {
 	resetOverlay();
 	contentSetup(`${hash}Section`);
 	window.scrollTo(0, 0);
@@ -180,15 +191,16 @@ const navClick = function(hash) {
 // More work still to be done
 window.addEventListener('load', (event) => {
 	windowWidth = window.innerWidth;
-	breadcrumbSetup();
-	window.scrollTo(0, 0);
-	if (windowWidth < 425) {
+	// window.scrollTo(0, 0);
+	if (windowWidth > 425) {
+		breadcrumbSetup();
+	} else if (windowWidth < 425) {
 		btnMaker();
 	};
 	if (windowWidth < 425 && location.hash == "") {
-			location.hash = "#/articles";
-			contentSetup("articlesSection");
-			arrayRefresh(articleArray);
+		location.hash = "#/articles";
+		contentSetup("articlesSection");
+		arrayRefresh(articleArray);
 	} else if (location.hash == "#/articles") {
 		contentSetup("articlesSection");
 		arrayRefresh(articleArray);
@@ -197,7 +209,7 @@ window.addEventListener('load', (event) => {
 	} else if (location.hash == "#/social") {
 		contentSetup("socialSection");
 	} else if (location.hash == "#/random") {
-		contentSetup("randomSection");
+		randomArticle();
 	} else if (location.hash.includes("articles/")) {
 		articleSetup();
 	} else {
@@ -207,7 +219,10 @@ window.addEventListener('load', (event) => {
 
 // This is to load the content on hash change
 window.addEventListener('hashchange', () => {
-	breadcrumbSetup();
+	// window.scrollTo(0, 0);
+	if (windowWidth > 425) {
+		breadcrumbSetup();
+	};
 	resetOverlay();
 	if (location.hash == "#/articles") {
 		contentSetup("articlesSection");
@@ -217,7 +232,7 @@ window.addEventListener('hashchange', () => {
 	} else if (location.hash == "#/social") {
 		contentSetup("socialSection");
 	} else if (location.hash == "#/random") {
-		contentSetup("randomSection");
+		randomArticle();
 	} else if (location.hash == "") {
 		arrayRefresh(mainArray);
 	} else if (location.hash.includes("articles/")) {
@@ -225,59 +240,18 @@ window.addEventListener('hashchange', () => {
 	}
 });
 
-// Changes content to the article content when article button is pressed
-articleLink.addEventListener('click', () => {
-	navClick("articles");
-	arrayRefresh(articleArray);
-});
-
-// Changes content to the store content when store button is pressed
-storeLink.addEventListener('click', () => {
-	navClick("store");
-});
-
-// Changes content to the social content when social button is pressed
-socialLink.addEventListener('click', () => {
-	navClick("social");
-});
-
-// Changes content to the random content when random button is pressed
-randomLink.addEventListener('click', () => {
-	navClick("random");
-});
-
-// Changes content to the homepage content when home button is pressed
-homeLink.addEventListener('click', () => {
-	windowWidth = window.innerWidth;
-	if (windowWidth < 425) {
-		contentSetup("articlesSection");
-		arrayRefresh(articleArray);
-	} else {
-		contentSetup("mainSection");
-		arrayRefresh(mainArray);
-	};
-});
-
 // Turn hamburger/X icons into a button and append it to the header
-const btnMaker = function() {
+// This creates the button in its initial hamburger state
+const btnMaker = () => {
 	newButton.classList.add("openBtn");
 	newButton.innerHTML = hbBtn;
 	header.append(newButton);
 };
 
-const btnRemove = function() {
+// This is to remove the button once we are no longer in a mobile size
+const btnRemove = () => {
 	newButton.remove();
 }
-
-const delay = (seconds) =>
-	new Promise((resolves) =>
-		setTimeout(resolves, seconds * 1000)
-);
-
-const overlayWait = async () => {
-	await delay(0.3);
-	headNavList.style.opacity = "1";
-};
 
 // Function to open and close the overlay
 newButton.addEventListener('click', () => {
@@ -285,6 +259,10 @@ newButton.addEventListener('click', () => {
 		btnStatus = false;
 		header.style.height = "100vh";
 		headNav.style.display = "flex";
+		const overlayWait = async () => {
+			await delay(0.2);
+			headNavList.style.opacity = "1";
+		};
 		overlayWait();
 		newButton.innerHTML = xBtn;
 	} else if (btnStatus == false) {
@@ -304,6 +282,12 @@ window.addEventListener('resize', () => {
 		btnMaker();
 	}
 });
+
+// This is a delay that is used for animations
+const delay = (seconds) =>
+	new Promise((resolves) =>
+		setTimeout(resolves, seconds * 1000)
+);
 
 // This is an idea I was testing but have left behind for now
 // document.querySelectorAll(".reviewItem").forEach((item) => {
