@@ -7,11 +7,6 @@ const header = document.querySelector("header");
 const headNav = document.querySelector(".headNav");
 const headNavList = document.querySelector(".headNavList");
 const headArray = [header, headNav, headNavList];
-const homeLink = document.querySelector(".title");
-const articleLink = document.querySelector(".articlesLink");
-const storeLink = document.querySelector(".store");
-const socialLink = document.querySelector(".social");
-const randomLink = document.querySelector(".random");
 const newButton = document.createElement("button");
 const hbBtn = `
 	<svg class="headMenu" xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 24 24" width="3em" fill="#ED1D20">
@@ -57,14 +52,14 @@ const arrayRefresh = (array) => {
 };
 
 // This validates which object is being called and viewed on the page
-const validator = (stringArray) => {
+const validator = () => {
 	let locationString = location.hash.toString().substring(2).split('/');
 	let validator;
 	locationString.forEach((item) => {
 		let initValidator = parseInt(item, 10);
 		if (Number.isFinite(initValidator) == true) {
 			validator = initValidator;
-		};
+		}
 	});
 	let validatedArticle = articleArray.find(({id}) => id == validator);
 	let returnResults = [validatedArticle, locationString];
@@ -102,14 +97,14 @@ const articleSetup = (id = validator()[0]) => {
 	`;
 	mainSection.append(articleBody);
 	window.scrollTo(0, 0);
-}
+};
 
 // This calls a random article from the array
 const randomArticle = () => {
 	let article = articleArray[Math.floor(Math.random()*articleArray.length)];
 	location.hash = article.link;
 	articleSetup(article);
-}
+};
 
 // Reset mobile overlay
 const resetOverlay = () => {
@@ -119,7 +114,7 @@ const resetOverlay = () => {
 	if (btnStatus != true){
 		newButton.innerHTML = hbBtn;
 		btnStatus = true;
-	};
+	}
 };
 
 // Sets up the CSS for the content that we want to show on the page
@@ -127,7 +122,7 @@ const contentSetup = (name) => {
 	mainSection.innerHTML = ``;
 	mainSection.className = `${name}`;
 	resetOverlay();
-}
+};
 
 // Add breadcrumbs to the nav
 // This function just resets the breadcrumbs
@@ -135,7 +130,7 @@ const resetBreadcrumb = () => {
 	if (location.hash != "") {
 		breadcrumb.innerHTML = (breadcrumbStarter);
 		breadcrumb.style.display = "flex";
-	};
+	}
 };
 
 // This creates the li for the breadcrumb and appends them to the html
@@ -150,15 +145,15 @@ const bcPopulator = (array) => {
 		`;
 		breadcrumb.append(bcItem);
 	};
-	if (i = array.length) {
+	if (array.length == (i + 1)) {
 		const bcItem = document.createElement("li");
 		bcItem.classList.add("currentBcItem");
 		bcItem.innerHTML = `
-			<p class="bcCurrent">${array[i-1]}</p>
+			<p class="bcCurrent">${array[i]}</p>
 		`;
 		breadcrumb.append(bcItem);
 	}
-}
+};
 
 //This function adds the breadcrumbs dynamically to the nav
 const breadcrumbSetup = () => {
@@ -175,28 +170,21 @@ const breadcrumbSetup = () => {
 			bcArray = [validatedArticle.section, validatedArticle.headline];
 		} else {
 			bcArray = [validatedArticle.section, validatedArticle.subsection, validatedArticle.headline];
-		};
+		}
 		bcPopulator(bcArray);
-	};
-};
-
-// Handles clicks on nav links
-const navClick = (hash) => {
-	resetOverlay();
-	contentSetup(`${hash}Section`);
-	window.scrollTo(0, 0);
+	}
 };
 
 // Loads the content for each page on page load depending on the hash.
 // More work still to be done
-window.addEventListener('load', (event) => {
+window.addEventListener('load', () => {
 	windowWidth = window.innerWidth;
 	// window.scrollTo(0, 0);
 	if (windowWidth > 425) {
 		breadcrumbSetup();
 	} else if (windowWidth < 425) {
 		btnMaker();
-	};
+	}
 	if (windowWidth < 425 && location.hash == "") {
 		location.hash = "#/articles";
 		contentSetup("articlesSection");
@@ -214,7 +202,7 @@ window.addEventListener('load', (event) => {
 		articleSetup();
 	} else {
 		arrayRefresh(mainArray);
-	};
+	}
 });
 
 // This is to load the content on hash change
@@ -222,7 +210,7 @@ window.addEventListener('hashchange', () => {
 	// window.scrollTo(0, 0);
 	if (windowWidth > 425) {
 		breadcrumbSetup();
-	};
+	}
 	resetOverlay();
 	if (location.hash == "#/articles") {
 		contentSetup("articlesSection");
@@ -251,7 +239,7 @@ const btnMaker = () => {
 // This is to remove the button once we are no longer in a mobile size
 const btnRemove = () => {
 	newButton.remove();
-}
+};
 
 // Function to open and close the overlay
 newButton.addEventListener('click', () => {
