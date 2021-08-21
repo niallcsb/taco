@@ -194,7 +194,7 @@ const monthString = function(date) {
 		case 11:
 			month = "December";
 			break;
-	};
+	}
 	return month;
 };
 
@@ -212,7 +212,7 @@ const mainArray = [];
 
 for (let i = 0; i < 4; i++) {
 	mainArray[i] = articleArray[i]
-};
+}
 
 // Export both arrays
 

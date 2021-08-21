@@ -144,7 +144,7 @@ const bcPopulator = (array) => {
 			<p class="bcArrow">></p>
 		`;
 		breadcrumb.append(bcItem);
-	};
+	}
 	if (array.length == (i + 1)) {
 		const bcItem = document.createElement("li");
 		bcItem.classList.add("currentBcItem");
