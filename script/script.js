@@ -101,7 +101,7 @@ const articleSetup = (id = validator()[0]) => {
 
 // This calls a random article from the array
 const randomArticle = () => {
-	let article = articleArray[Math.floor(Math.random()*articleArray.length)];
+	let article = articleArray[Math.floor(Math.random() * articleArray.length)];
 	location.hash = article.link;
 	articleSetup(article);
 };
@@ -179,7 +179,6 @@ const breadcrumbSetup = () => {
 // More work still to be done
 window.addEventListener('load', () => {
 	windowWidth = window.innerWidth;
-	// window.scrollTo(0, 0);
 	if (windowWidth > 425) {
 		breadcrumbSetup();
 	} else if (windowWidth < 425) {
@@ -193,9 +192,9 @@ window.addEventListener('load', () => {
 		contentSetup("articlesSection");
 		arrayRefresh(articleArray);
 	} else if (location.hash == "#/store") {
-		contentSetup("storeSection");
+		storeSetup();
 	} else if (location.hash == "#/social") {
-		contentSetup("socialSection");
+		socialSetup();
 	} else if (location.hash == "#/random") {
 		randomArticle();
 	} else if (location.hash.includes("articles/")) {
@@ -207,7 +206,6 @@ window.addEventListener('load', () => {
 
 // This is to load the content on hash change
 window.addEventListener('hashchange', () => {
-	// window.scrollTo(0, 0);
 	if (windowWidth > 425) {
 		breadcrumbSetup();
 	}
@@ -216,9 +214,9 @@ window.addEventListener('hashchange', () => {
 		contentSetup("articlesSection");
 		arrayRefresh(articleArray);
 	} else if (location.hash == "#/store") {
-		contentSetup("storeSection");
+		storeSetup();
 	} else if (location.hash == "#/social") {
-		contentSetup("socialSection");
+		socialSetup();
 	} else if (location.hash == "#/random") {
 		randomArticle();
 	} else if (location.hash == "") {
@@ -247,16 +245,18 @@ newButton.addEventListener('click', () => {
 		btnStatus = false;
 		header.style.height = "100vh";
 		headNav.style.display = "flex";
-		const overlayWait = async () => {
-			await delay(0.2);
-			headNavList.style.opacity = "1";
-		};
 		overlayWait();
 		newButton.innerHTML = xBtn;
 	} else if (btnStatus == false) {
 		resetOverlay();
 	}
 });
+
+// This waits a set amount of time before adding a style to the nav when you press the button
+const overlayWait = async () => {
+	await delay(0.2);
+	headNavList.style.opacity = "1";
+};
 
 // Reset everything on change from mobile view to tablet/desktop views and back again
 window.addEventListener('resize', () => {
@@ -276,6 +276,30 @@ const delay = (seconds) =>
 	new Promise((resolves) =>
 		setTimeout(resolves, seconds * 1000)
 );
+
+const storeSetup = () => {
+	mainSection.innerHTML = ``;
+	mainSection.className = "storeSection";
+	const store = document.createElement("article");
+	store.classList.add("storeBody");
+	store.innerHTML = `
+		<h1>Come back soon!</h1>
+		<p>All your taco related shopping needs will be available to you here. Possibly brought to you using Ruby On Rails, possibly not. Who knows?</p>
+	`;
+	mainSection.append(store);
+};
+
+const socialSetup = () => {
+	mainSection.innerHTML = ``;
+	mainSection.className = "socialSection";
+	const social = document.createElement("article");
+	social.classList.add("socialBody");
+	social.innerHTML = `
+		<h1>Come back soon!</h1>
+		<p>Social media links coming soon. Instagram and shit. Maybe TikTok, do you like dance challenges?</p>
+	`;
+	mainSection.append(social);
+};
 
 // This is an idea I was testing but have left behind for now
 // document.querySelectorAll(".reviewItem").forEach((item) => {

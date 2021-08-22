@@ -154,7 +154,9 @@ header {
 
 .mainSection,
 .articlesSection,
-.individualArticle {
+.individualArticle,
+.storeSection,
+.socialSection {
 	padding: 0 1.4em;
 }
 
@@ -229,6 +231,12 @@ header {
 
 .articleSubHead {
 	font-size: 1.3em;
+}
+
+.storeSection,
+.socialSection {
+	text-align: center;
+	margin: 0 auto;
 }
 
 /* Footer Styles */
