@@ -1,12 +1,8 @@
 'use strict'
 
-import {articleArray, mainArray} from "./data.js";
+import {articleArray, mainArray, bioArray, navArray, faqArray} from "./data.js";
 
 // Declare Variables
-const header = document.querySelector("header");
-const headNav = document.querySelector(".headNav");
-const headNavList = document.querySelector(".headNavList");
-const headArray = [header, headNav, headNavList];
 const newButton = document.createElement("button");
 const hbBtn = `
 	<svg class="headMenu" xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 24 24" width="3em" fill="#ED1D20">
@@ -22,6 +18,60 @@ const xBtn = `
 `;
 let windowWidth;
 let btnStatus = true;
+
+// This populates the nav in the header
+const headerNav = () => {
+	const headNavList = document.querySelector(".headNavList");
+	navArray.forEach((item) => {
+		const headNavItem = document.createElement("li");
+		headNavItem.classList.add(`${item.className}`);
+		const headNavLink = document.createElement("a")
+		headNavLink.classList.add(`${item.className}Link`);
+		headNavLink.setAttribute("href", `${item.link}`);
+		headNavLink.textContent = `${item.title}`;
+		headNavItem.append(headNavLink);
+		headNavList.append(headNavItem);
+	});
+};
+
+const footerNav = () => {
+	const footNav = document.querySelector(".footNav");
+	navArray.forEach((item) => {
+		const footNavSection = document.createElement("section");
+		footNavSection.classList.add("footNavSection");
+		const listTitle = document.createElement("a");
+		listTitle.classList.add("listTitle");
+		listTitle.setAttribute("href", `${item.link}`);
+		listTitle.textContent = `${item.title}`;
+		const footList = document.createElement("ul");
+		footList.classList.add("footList");
+		if (item.subLinks.length != 0) {
+			item.subLinks.forEach((item) => {
+				const footListItem = document.createElement("li");
+				if (item.hasOwnProperty("title")) {
+					const listItemTitle = document.createElement("h4");
+					listItemTitle.classList.add("subLinkTitle");
+					listItemTitle.textContent = `${item.title}`;
+					footListItem.append(listItemTitle);
+					footList.append(footListItem);
+				} else {
+					const footListLink = document.createElement("a");
+					footListLink.setAttribute("href", `${item.link}`);
+					footListLink.textContent = `${item.name}`;
+					footListItem.append(footListLink);
+					footList.append(footListItem);
+				}
+			});
+		};
+		footNavSection.append(listTitle, footList);
+		footNav.append(footNavSection);
+	});
+}
+
+const navPopulator = () => {
+	headerNav();
+	footerNav();
+};
 
 // Functions
 // Populate article links from the arrays
@@ -119,75 +169,46 @@ const socialSetup = () => {
 	const content = document.querySelector("#allContent");
 	const socialArticle = document.createElement("article");
 	socialArticle.classList.add("socialArticle");
-	const niallSection = niallSetup();
-	const myrSection = myrSetup();
-	socialArticle.append(niallSection, myrSection);
+	bioArray.forEach((item) => {
+		let bioSection = bioSetup(item);
+		socialArticle.append(bioSection);
+	});
 	content.append(socialArticle);
 }
 
-const niallSetup = () => {
-	const niallSection = document.createElement("section");
-	niallSection.classList.add("niallSection");
-	const niallHeadline = document.createElement("h1");
-	niallHeadline.classList.add("niallHeadline");
-	niallHeadline.textContent = "Niall Bermingham"
-	const niallImg = document.createElement("img");
-	niallImg.setAttribute("src", "images/ppics/niall.jpeg");
-	niallImg.classList.add("niallImg");
-	niallImg.setAttribute("width", "300");
-	const niallBio = document.createElement("p");
-	niallBio.textContent = "Niall is a mainly self-taught frontend dev, and massive taco fan. He is working on expanding his skill set in HTML, CSS, JS, and more. He was born in Ireland and currently lives in Ontario, Canada where he spends most of his time annoying Myr about arrays and different types of for loops. Reach out and connect with him on his social links below.";
-	const niallTwitter = document.createElement("a");
-	niallTwitter.textContent = "Twitter";
-	niallTwitter.setAttribute("href", "https://twitter.com/niallcsb");
-	niallTwitter.setAttribute("target", "_blank");
-	const niallGithub = document.createElement("a");
-	niallGithub.textContent = "GitHub";
-	niallGithub.setAttribute("href", "https://github.com/niallcsb");
-	niallGithub.setAttribute("target", "_blank");
-	const niallLinkedin = document.createElement("a");
-	niallLinkedin.textContent = "LinkedIn";
-	niallLinkedin.setAttribute("href", "https://www.linkedin.com/in/niallcsb/");
-	niallLinkedin.setAttribute("target", "_blank");
+const bioSetup = (item) => {
+	const bioSection = document.createElement("section");
+	bioSection.classList.add("bioSection");
+	const bioTitle = document.createElement("h1");
+	bioTitle.classList.add("bioTitle");
+	bioTitle.textContent = `${item.firstName} ${item.surName}`;
+	const bioImg = document.createElement("img");
+	bioImg.setAttribute("src", `${item.image}`);
+	bioImg.classList.add("bioImg");
+	bioImg.setAttribute("width", "100%");
+	const bioBody = document.createElement("p");
+	bioBody.classList.add("bioBody");
+	bioBody.textContent = `${item.body}`;
 	const linkSpan = document.createElement("span");
 	linkSpan.classList.add("linkSpan");
-	linkSpan.append(niallTwitter, `|`, niallGithub, `|`, niallLinkedin);
-	niallSection.append(niallHeadline, niallImg, niallBio, linkSpan);
-	return niallSection;
-}
-
-const myrSetup = () => {
-	const myrSection = document.createElement("section");
-	myrSection.classList.add("myrSection");
-	const myrHeadline = document.createElement("h1");
-	myrHeadline.textContent = "Myr Galarneau";
-	const myrImg = document.createElement("img");
-	myrImg.setAttribute("src", "images/ppics/myr.jpeg");
-	myrImg.classList.add("myrImg");
-	myrImg.setAttribute("width", "300");
-	const myrBio = document.createElement("p");
-	myrBio.textContent = "Myriam is a pretty great designer, but the real magic happens after a couple of margs. She loves functional and smart design which happens to look good while doing it's job. That's also why she loves tacos. They're aesthetic, delcious, and incredibly fun to eat.";
-	const myrSite = document.createElement("a");
-	myrSite.textContent = "Website";
-	myrSite.setAttribute("href", "http://www.myriamgalarneau.com/");
-	myrSite.setAttribute("target", "_blank");
-	const myrInsta = document.createElement("a");
-	myrInsta.textContent = "Instagram";
-	myrInsta.setAttribute("href", "https://www.instagram.com/myrfest/");
-	myrInsta.setAttribute("target", "_blank");
-	const myrLinkedin = document.createElement("a");
-	myrLinkedin.textContent = "LinkedIn";
-	myrLinkedin.setAttribute("href", "https://www.linkedin.com/in/myriamgalarneau/");
-	myrLinkedin.setAttribute("target", "_blank");
-	const linkSpan = document.createElement("span");
-	linkSpan.classList.add("linkSpan");
-	linkSpan.append(myrSite, `|`, myrInsta, `|`, myrLinkedin);
-	myrSection.append(myrHeadline, myrImg, myrBio, linkSpan);
-	return myrSection;
+	item.links.forEach((item) => {
+		const bioLink = document.createElement("a");
+		bioLink.classList.add("bioLink");
+		bioLink.textContent = `${item.name}`;
+		bioLink.setAttribute("href", `${item.link}`);
+		bioLink.setAttribute("target", "_blank");
+		linkSpan.append(bioLink);
+	});
+	bioSection.append(bioTitle, bioImg, bioBody, linkSpan);
+	return bioSection;
 }
 
 // Reset mobile overlay
 const resetOverlay = () => {
+	const header = document.querySelector("header");
+	const headNav = document.querySelector(".headNav");
+	const headNavList = document.querySelector(".headNavList");
+	const headArray = [header, headNav, headNavList];
 	headArray.forEach((item) => {
 		item.removeAttribute('style')
 	});
@@ -277,6 +298,7 @@ const breadcrumbSetup = () => {
 // Loads the content for each page on page load depending on the hash.
 // More work still to be done
 window.addEventListener('load', () => {
+	navPopulator();
 	windowWidth = window.innerWidth;
 	if (windowWidth > 425 && location.hash != "") {
 		breadcrumbSetup();
@@ -297,6 +319,8 @@ window.addEventListener('load', () => {
 		socialSetup();
 	} else if (location.hash == "#/random") {
 		randomArticle();
+	} else if (location.hash == "#/faq") {
+		standinSetup("faq");
 	} else if (location.hash.includes("articles/")) {
 		articleSetup();
 	} else {
@@ -320,6 +344,8 @@ window.addEventListener('hashchange', () => {
 		socialSetup();
 	} else if (location.hash == "#/random") {
 		randomArticle();
+	} else if (location.hash == "#/faq") {
+		standinSetup("faq");
 	} else if (location.hash == "") {
 		arrayRefresh(mainArray);
 	} else if (location.hash.includes("articles/")) {
@@ -330,6 +356,7 @@ window.addEventListener('hashchange', () => {
 // Turn hamburger/X icons into a button and append it to the header
 // This creates the button in its initial hamburger state
 const btnMaker = () => {
+	const header = document.querySelector("header");
 	newButton.classList.add("openBtn");
 	newButton.innerHTML = hbBtn;
 	header.append(newButton);
@@ -343,6 +370,8 @@ const btnRemove = () => {
 // Function to open and close the overlay
 newButton.addEventListener('click', () => {
 	if (btnStatus == true) {
+		const header = document.querySelector("header");
+		const headNav = document.querySelector(".headNav");
 		btnStatus = false;
 		header.style.height = "100vh";
 		headNav.style.display = "flex";
@@ -355,6 +384,7 @@ newButton.addEventListener('click', () => {
 
 // This waits a set amount of time before adding a style to the nav when you press the button
 const overlayWait = async () => {
+	const headNavList = document.querySelector(".headNavList");
 	await delay(0.2);
 	headNavList.style.opacity = "1";
 };
@@ -397,10 +427,10 @@ const standinSetup = (name) => {
 			<h1>Come back soon!</h1>
 			<p>All your taco related shopping needs will be available to you here. Possibly brought to you using Ruby On Rails, possibly not. Who knows?</p>
 		`;
-	} else if (name == "social") {
+	} else if (name == "faq") {
 		standin.innerHTML = `
 			<h1>Come back soon!</h1>
-			<p>Social media links coming soon. Instagram and shit. Maybe TikTok, do you like dance challenges?</p>
+			<p>Answers to all your questions, stupid and smart will be here for you soon.</p>
 		`;
 	}
 	content.append(standin);

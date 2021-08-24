@@ -102,6 +102,7 @@ header {
 	align-items: center;
 	font-size: 2.5em;
 	transition: 0.4s;
+  text-transform: capitalize;
 }
 
 .breadcrumb {
@@ -150,7 +151,8 @@ header {
 
 .homeContent,
 .individualArticle,
-.storeContent {
+.storeContent,
+.faqContent {
 	margin: 3em 0 1.4em;
 	padding: 0 1.4em;
 }
@@ -189,7 +191,9 @@ header {
 .review,
 .reviewLink,
 .reviewHeadings,
-.reviewDate {
+.reviewDate,
+.bioSection,
+.articleImg {
 	border-radius: .1em;
 }
 
@@ -235,7 +239,7 @@ header {
 }
 
 .storeContent,
-.socialContent {
+.faqContent {
 	text-align: center;
 }
 
@@ -243,37 +247,42 @@ header {
 	margin: 0;
 }
 
-.socialContent section {
+.bioSection {
 	border: .4em solid #ED1D20;
-}
-
-.socialContent section {
 	margin-bottom: 1.4em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-.socialContent section * {
+.bioSection * {
 	padding-bottom: 1.4rem;
 }
 
-.socialContent section h1 {
+.bioTitle {
 	margin: 0;
 	font-family: 'Lobster', cursive;
 	font-size: 2em;
+	text-align: center;
 }
 
-.socialContent section p {
+.bioImg {
+	max-width: 400px;
+}
+
+.bioBody {
 	margin: 0;
 	padding-left: 1.4rem;
 	padding-right: 1.4rem;
 }
 
-.socialContent section a {
+.bioLink {
 	height: 100%;
 	align-self: center;
 	padding-bottom: 0;
 }
 
-.socialContent .linkSpan {
+.linkSpan {
 	display: flex;
 	flex-direction: column;
 }
@@ -290,29 +299,34 @@ footer li {
 }
 
 .footNav {
-	width: 100%;
 	padding: 1.4em 0;
 }
 
-.footItem {
+.footNavSection {
 	width: 30%;
 	margin: 0 auto 1.4em;
 }
 
-.footItem:last-of-type {
+.footNavSection:last-of-type {
 	margin: auto;
 }
 
 .listTitle {
 	font-size: 1.5em;
-	font-family: 'Lobster', cursive;
 	color: #ffcc00;
-	margin: 0;
 }
 
 .footList {
+	display: flex;
+	flex-direction: column;
 	list-style: none;
-	padding: 0;
+	padding: .4em 0 0;
+	margin: 0;
+}
+
+.listTitle,
+.subLinkTitle {
+	font-family: 'Lobster', cursive;
 	margin: 0;
 }
 
@@ -391,25 +405,27 @@ footer li {
 		width: 85vw;
 		margin: 0 auto;
 	}
-	.socialContent section h1 {
+	.bioTitle {
 		font-size: 3em;
 	}
-	.socialContent section:last-of-type {
+	.bioSection:last-of-type {
 		margin-bottom: 0;
 	}
 	/* Footer Styles */
 	.footNav {
+		width: 85vw;
+		margin: 0 auto;
 		display: flex;
 		flex-direction: row;
-		align-items: center;
+		align-items: baseline;
 		justify-content: space-around;
 		padding: 1.4em 0;
 	}
-	.footItem {
+	.footNavSection {
 		margin: 0;
 		width: auto;
 	}
-	.footItem:last-of-type {
+	.footNavSection:last-of-type {
 		margin: 0;
 	}
 }
@@ -430,34 +446,37 @@ footer li {
 	.individualArticle {
 		width: 70vw;
 	}
-	.socialContent section {
+	.bioSection {
 		display: grid;
-		grid-template: 3em repeat(3, 1fr) / 300px repeat(3, 1fr);
+		grid-template: 3em repeat(2, 1fr) 3em / 300px repeat(3, 1fr);
 		justify-content: center;
 		align-items: center;
 	}
-	.socialContent section * {
+	.bioSection * {
 		padding-bottom: 0;
 	}
-	.socialContent section h1 {
+	.bioTitle {
 		grid-area: 1 / 2 / 2 / 5;
 		align-self: baseline;
 	}
-	.socialContent section img {
+	.bioImg {
 		grid-area: 1 / 1 / 5 / 1;
 	}
-	.socialContent section p {
+	.bioBody {
 		grid-area: 2 / 2 / 4 / 5;
 	}
-	.socialContent .linkSpan {
+	.linkSpan {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-evenly;
+		justify-content: space-around;
 		grid-area: 4 / 2 / 5 / 5;
 	}
 	/* Footer Styles */
 	footer {
 		min-height: calc(100vh - 950px);
+	}
+	.footNav {
+		width: 70vw;
 	}
 }
 
@@ -469,7 +488,8 @@ footer li {
 	}
 	/* Main Styles */
 	.homeContent,
-	.storeContent {
+	.storeContent,
+	.faqContent {
 		height: 80vh;
 		max-height: 750px;
 	}
@@ -483,7 +503,8 @@ footer li {
 	.homeContent,
 	.articlesContent,
 	.individualArticle,
-	.socialContent {
+	.socialContent,
+	.faqContent {
 		padding: 1.4em;
 	}
 	.homeContent .reviewLink:first-child {

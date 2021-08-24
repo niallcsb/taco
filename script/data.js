@@ -1,11 +1,12 @@
-import Review_Link from "./Review_Link.js"
-
-// headline, subhead, link, image_169, imageArticle, caption, id, date, section, subsection
+import Review_Link from "./Review_Link.js";
+import Bio from "./Bio.js";
+import Nav_Item from "./Nav_Item.js";
 
 // Create arrays
 
 // First is the article array for all Reviews
 // Link and date intentionally left blank for now. Updated through a function later on.
+// Review_Link: headline, subhead, link, image_169, imageArticle, caption, id, date, section, subsection
 const articleArray = [
 	new Review_Link(
 		"Grand Electric",
@@ -214,6 +215,86 @@ for (let i = 0; i < 4; i++) {
 	mainArray[i] = articleArray[i]
 }
 
-// Export both arrays
+// This array hold the bio and social info
+// Bio: firstName, surName, body, image, links
+const bioArray = [
+	new Bio(
+		"Niall",
+		"Bermingham",
+		"Niall is a mainly self-taught frontend dev, and massive taco fan. He is working on expanding his skill set in HTML, CSS, JS, and more. He was born in Ireland and currently lives in Ontario, Canada where he spends most of his time annoying Myr about arrays and different types of for-loops. Reach out and connect with him on his social links below.",
+		"images/ppics/niall.jpeg",
+		[{name:"Twitter", link:"https://twitter.com/niallcsb"},
+		{name:"GitHub", link:"https://github.com/niallcsb"},
+		{name:"LinkedIn", link:"https://www.linkedin.com/in/niallcsb/"}]
+	),
+	new Bio(
+		"Myr",
+		"Galarneau",
+		"Myriam is a pretty great designer, but the real magic happens after a couple of margs. She loves functional and smart design which happens to look good while doing it's job. That's also why she loves tacos. They're aesthetic, delcious, and incredibly fun to eat.",
+		"images/ppics/myr.jpeg",
+		[{name:"Website", link:"https://www.myriamgalarneau.com/"},
+		{name:"Instagram", link:"https://www.instagram.com/myrfest/"},
+		{name:"LinkedIn", link:"https://www.linkedin.com/in/myriamgalarneau/"}]
+	)
+];
 
-export {articleArray, mainArray};
+// This is the array with all of the FAQs
+const faqArray = [
+	{question:"How do you make a margarita?",
+	answer:"I'm glad you asked. You're going to need a tequila or mezcal of your choice, some agave syrup, and a shit load of limes."},
+	{question:"Have you ever been to Taco Bell?",
+	answer:"Fuck you."}
+];
+
+
+// Nav_Item: title, className, link,	subLinks
+
+const navArray = [
+	new Nav_Item(
+		"Articles",
+		"",
+		"",
+		[{name:"Latest", link:`${articleArray[0].link}`},]
+	),
+	new Nav_Item(
+		"Store",
+		"",
+		"",
+		[]
+	),
+	new Nav_Item(
+		"Social",
+		"",
+		"",
+		[{title:"Niall"},
+		{name:"Twitter", link:"https://twitter.com/niallcsb"},
+		{name:"GitHub", link:"https://github.com/niallcsb"},
+		{name:"LinkedIn", link:"https://www.linkedin.com/in/niallcsb/"},
+		{title:"Myr"},
+		{name:"Website", link:"https://www.myriamgalarneau.com/"},
+		{name:"Instagram", link:"https://www.instagram.com/myrfest/"},
+		{name:"LinkedIn", link:"https://www.linkedin.com/in/myriamgalarneau/"}]
+	),
+	new Nav_Item(
+		"Random",
+		"",
+		"",
+		[]
+	),
+	new Nav_Item(
+		"FAQ",
+		"",
+		"",
+		[]
+	)
+];
+
+navArray.forEach((item) => {
+	item.className = item.title.toLowerCase();
+	item.link = `#/${item.className}`;
+});
+
+
+// Export the arrays
+
+export {articleArray, mainArray, bioArray, navArray, faqArray};
