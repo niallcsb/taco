@@ -48,7 +48,7 @@ const footerNav = () => {
 		if (item.subLinks.length != 0) {
 			item.subLinks.forEach((item) => {
 				const footListItem = document.createElement("li");
-				if (item.hasOwnProperty("title")) {
+				if (Object.prototype.hasOwnProperty.call(item, "title")) {
 					const listItemTitle = document.createElement("h4");
 					listItemTitle.classList.add("subLinkTitle");
 					listItemTitle.textContent = `${item.title}`;
@@ -62,7 +62,7 @@ const footerNav = () => {
 					footList.append(footListItem);
 				}
 			});
-		};
+		}
 		footNavSection.append(listTitle, footList);
 		footNav.append(footNavSection);
 	});
