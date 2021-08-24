@@ -148,15 +148,16 @@ header {
 
 /* Main Styles */
 
-.mainContent {
-		margin-top: 3em;
+.homeContent,
+.individualArticle,
+.storeContent {
+	margin: 3em 0 1.4em;
+	padding: 0 1.4em;
 }
 
-.mainSection,
-.articlesSection,
-.individualArticle,
-.storeSection,
-.socialSection {
+.articlesContent,
+.socialContent {
+	margin-top: 3em;
 	padding: 0 1.4em;
 }
 
@@ -233,10 +234,48 @@ header {
 	font-size: 1.3em;
 }
 
-.storeSection,
-.socialSection {
+.storeContent,
+.socialContent {
 	text-align: center;
-	margin: 0 auto;
+}
+
+.socialHeadline {
+	margin: 0;
+}
+
+.socialContent section {
+	border: .4em solid #ED1D20;
+}
+
+.socialContent section {
+	margin-bottom: 1.4em;
+}
+
+.socialContent section * {
+	padding-bottom: 1.4rem;
+}
+
+.socialContent section h1 {
+	margin: 0;
+	font-family: 'Lobster', cursive;
+	font-size: 2em;
+}
+
+.socialContent section p {
+	margin: 0;
+	padding-left: 1.4rem;
+	padding-right: 1.4rem;
+}
+
+.socialContent section a {
+	height: 100%;
+	align-self: center;
+	padding-bottom: 0;
+}
+
+.socialContent .linkSpan {
+	display: flex;
+	flex-direction: column;
 }
 
 /* Footer Styles */
@@ -331,16 +370,19 @@ footer li {
 		display: block;
 	}
 	/* Main Styles */
-	.mainContent{
+	.homeContent,
+	.articlesContent,
+	.individualArticle,
+	.storeContent,
+	.socialContent {
 		margin-top: 0;
-	}
-	.mainSection,
-	.articlesSection,
-	.individualArticle {
-		padding: 1.4em 1.4em 0;
+		padding: 1.4em 1.4em ;
 	}
 	.review {
 		height: 25em;
+	}
+	.reviewLink:last-of-type .review {
+		margin-bottom: 0;
 	}
 	.headline {
 		font-size: 2em;
@@ -348,6 +390,12 @@ footer li {
 	.individualArticle {
 		width: 85vw;
 		margin: 0 auto;
+	}
+	.socialContent section h1 {
+		font-size: 3em;
+	}
+	.socialContent section:last-of-type {
+		margin-bottom: 0;
 	}
 	/* Footer Styles */
 	.footNav {
@@ -382,6 +430,31 @@ footer li {
 	.individualArticle {
 		width: 70vw;
 	}
+	.socialContent section {
+		display: grid;
+		grid-template: 3em repeat(3, 1fr) / 300px repeat(3, 1fr);
+		justify-content: center;
+		align-items: center;
+	}
+	.socialContent section * {
+		padding-bottom: 0;
+	}
+	.socialContent section h1 {
+		grid-area: 1 / 2 / 2 / 5;
+		align-self: baseline;
+	}
+	.socialContent section img {
+		grid-area: 1 / 1 / 5 / 1;
+	}
+	.socialContent section p {
+		grid-area: 2 / 2 / 4 / 5;
+	}
+	.socialContent .linkSpan {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		grid-area: 4 / 2 / 5 / 5;
+	}
 	/* Footer Styles */
 	footer {
 		min-height: calc(100vh - 950px);
@@ -395,25 +468,28 @@ footer li {
 		max-height: 200px;
 	}
 	/* Main Styles */
-	.mainSection {
+	.homeContent,
+	.storeContent {
 		height: 80vh;
 		max-height: 750px;
 	}
-	.mainSection,
-	.articlesSection {
-		padding: 1.4em;
+	.homeContent,
+	.articlesContent {
 		display: grid;
 		grid-template: repeat(3, 1fr) / repeat(3, 1fr);
 		grid-gap: 1.4em;
 		grid-auto-rows: 1fr;
 	}
-	.individualArticle {
+	.homeContent,
+	.articlesContent,
+	.individualArticle,
+	.socialContent {
 		padding: 1.4em;
 	}
-	.mainSection .reviewLink:first-child {
+	.homeContent .reviewLink:first-child {
 		grid-area: 1 / 1 / 4 / 3;
 	}
-	.articlesSection .reviewLink {
+	.articlesContent .reviewLink {
 		height: 13em;
 	}
 	.review {
@@ -425,7 +501,7 @@ footer li {
 		box-shadow: 0 0 5px 2px #ffcc00;
 		transition: 0.4s;
 	}
-	.mainSection .reviewLink:first-child .subhead {
+	.homeContent .reviewLink:first-child .subhead {
 		display: block;
 		margin: .4rem;
 	}
@@ -433,7 +509,7 @@ footer li {
 
 @media only screen and (min-width: 1200px) {
 	/* Main Styles */
-	.mainContent {
+	#allContent {
 		width: 90vw;
 		margin: auto;
 	}
@@ -441,14 +517,14 @@ footer li {
 
 @media only screen and (min-width: 1440px) {
 	/* Main Styles */
-	.mainContent {
+	#allContent {
 		width: 85vw;
 	}
 }
 
 @media only screen and (min-width: 2560px) {
 	/* Main Styles */
-	.mainContent {
+	#allContent {
 		width: 80vw;
 	}
 }
