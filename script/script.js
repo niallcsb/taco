@@ -108,11 +108,16 @@ const arrayRefresh = (array) => {
 const validator = () => {
 	let locationString = location.hash.toString().substring(2).split('/');
 	let validator;
+	let i = 0;
 	locationString.forEach((item) => {
+		if (item === "faq") {
+			locationString[i] = "FAQ";
+		};
 		let initValidator = parseInt(item, 10);
 		if (Number.isFinite(initValidator) == true) {
 			validator = initValidator;
 		}
+		i++;
 	});
 	let validatedArticle = articleArray.find(({id}) => id == validator);
 	let returnResults = [validatedArticle, locationString];
@@ -223,10 +228,13 @@ const faqSetup = () => {
 		const faqSummary = document.createElement("summary");
 		faqSummary.classList.add("faqSummary");
 		faqSummary.textContent = `${item.question}`;
-		const faqPara = document.createElement("p");
-		faqPara.classList.add("faqPara");
-		faqPara.textContent = `${item.answer}`;
-		faqDetails.append(faqSummary, faqPara);
+		faqDetails.append(faqSummary);
+		item.answer.forEach((item) => {
+			const faqPara = document.createElement("p");
+			faqPara.classList.add("faqPara");
+			faqPara.textContent = `${item}`;
+			faqDetails.append(faqPara);
+		});
 		faqArticle.append(faqDetails);
 	});
 	content.append(faqArticle);

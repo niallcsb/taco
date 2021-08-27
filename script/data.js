@@ -241,13 +241,13 @@ const bioArray = [
 // This is the array with all of the FAQs
 const faqArray = [
 	{question:"Why are you making this site?",
-	answer:"This is a project to build on and expand our skills in design, HTML, CSS, JavaScript and whatever else comes up along the way."},
+	answer:["This is a project to build on and expand our skills in design, HTML, CSS, JavaScript and whatever else comes up along the way."]},
 	{question:"Are you ever going to do actual restaurant reviews?",
-	answer:"Maybe. That was the original plan but then a lot happened in 2020 and now those plans are on hold."},
+	answer:["Maybe. That was the original plan but then a lot happened in 2020 and now those plans are on hold."]},
 	{question:"How do you make a margarita?",
-	answer:"We're glad you asked. You're going to need a tequila or mezcal of your choice, some agave syrup, and a shit load of limes. First step is to squeeze all the limes. This step is essential and really makes the marg all the more gratifying. Then you mix 3 parts lime juice with 1 and a half parts tequila and 1 and a half parts agave syrup. Add ice and shake together. Salt the rim of your favourite glass, pour your drink, and then enjoy."},
+	answer:["We're glad you asked. You're going to need a tequila or mezcal of your choice, some agave syrup, and a shit load of limes. First step is to squeeze all the limes.", "This step is essential and really makes the marg all the more gratifying.", "Then you mix 3 parts lime juice with 1 and a half parts tequila and 1 and a half parts agave syrup. Add ice and shake together. Salt the rim of your favourite glass, pour your drink, and then enjoy."]},
 	{question:"Have you ever been to Taco Bell?",
-	answer:"Fuck you."}
+	answer:["Fuck you."]}
 ];
 
 // Nav_Item: title, className, link,	subLinks
