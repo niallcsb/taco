@@ -25,7 +25,7 @@ const headerNav = () => {
 	navArray.forEach((item) => {
 		const headNavItem = document.createElement("li");
 		headNavItem.classList.add(`${item.className}`);
-		const headNavLink = document.createElement("a")
+		const headNavLink = document.createElement("a");
 		headNavLink.classList.add(`${item.className}Link`);
 		headNavLink.setAttribute("href", `${item.link}`);
 		headNavLink.textContent = `${item.title}`;
@@ -34,6 +34,7 @@ const headerNav = () => {
 	});
 };
 
+// This populates the nave in the footer
 const footerNav = () => {
 	const footNav = document.querySelector(".footNav");
 	navArray.forEach((item) => {
@@ -68,6 +69,7 @@ const footerNav = () => {
 	});
 }
 
+// This calls both the nav functions
 const navPopulator = () => {
 	headerNav();
 	footerNav();
@@ -154,7 +156,7 @@ const articleSetup = (id = validator()[0]) => {
 		articleBody.append(articlePara);
 	}
 	content.append(articleBody);
-	window.scrollTo(0, 0);
+	toTop();
 };
 
 // This calls a random article from the array
@@ -176,6 +178,7 @@ const socialSetup = () => {
 	content.append(socialArticle);
 }
 
+// This sets up the bio sections for the social page
 const bioSetup = (item) => {
 	const bioSection = document.createElement("section");
 	bioSection.classList.add("bioSection");
@@ -194,13 +197,39 @@ const bioSetup = (item) => {
 	item.links.forEach((item) => {
 		const bioLink = document.createElement("a");
 		bioLink.classList.add("bioLink");
-		bioLink.textContent = `${item.name}`;
 		bioLink.setAttribute("href", `${item.link}`);
-		bioLink.setAttribute("target", "_blank");
+		const socialIcon = document.createElement("img");
+		socialIcon.classList.add("socialIcon");
+		socialIcon.setAttribute("src", `${item.icon}`);
+		bioLink.append(socialIcon);
 		linkSpan.append(bioLink);
 	});
 	bioSection.append(bioTitle, bioImg, bioBody, linkSpan);
 	return bioSection;
+};
+
+// This is for the FAQ
+const faqSetup = () => {
+	const content = document.querySelector("#allContent");
+	const faqArticle = document.createElement("article");
+	faqArticle.classList.add("faqArticle");
+	const faqHeading = document.createElement("h1");
+	faqHeading.classList.add("faqHeading");
+	faqHeading.textContent = "Frequently Asked Questions";
+	faqArticle.append(faqHeading);
+	faqArray.forEach((item) => {
+		const faqDetails = document.createElement("details");
+		faqDetails.classList.add("faqDetails");
+		const faqSummary = document.createElement("summary");
+		faqSummary.classList.add("faqSummary");
+		faqSummary.textContent = `${item.question}`;
+		const faqPara = document.createElement("p");
+		faqPara.classList.add("faqPara");
+		faqPara.textContent = `${item.answer}`;
+		faqDetails.append(faqSummary, faqPara);
+		faqArticle.append(faqDetails);
+	});
+	content.append(faqArticle);
 }
 
 // Reset mobile overlay
@@ -224,6 +253,7 @@ const contentSetup = (name) => {
 	clearAll(content);
 	content.className = `${name}Content`;
 	resetOverlay();
+	toTop();
 };
 
 // Add breadcrumbs to the nav
@@ -320,7 +350,9 @@ window.addEventListener('load', () => {
 	} else if (location.hash == "#/random") {
 		randomArticle();
 	} else if (location.hash == "#/faq") {
-		standinSetup("faq");
+		// standinSetup("faq");
+		contentSetup("faq");
+		faqSetup();
 	} else if (location.hash.includes("articles/")) {
 		articleSetup();
 	} else {
@@ -345,7 +377,9 @@ window.addEventListener('hashchange', () => {
 	} else if (location.hash == "#/random") {
 		randomArticle();
 	} else if (location.hash == "#/faq") {
-		standinSetup("faq");
+		// standinSetup("faq");
+		contentSetup("faq");
+		faqSetup();
 	} else if (location.hash == "") {
 		arrayRefresh(mainArray);
 	} else if (location.hash.includes("articles/")) {
@@ -380,7 +414,7 @@ newButton.addEventListener('click', () => {
 	} else if (btnStatus == false) {
 		resetOverlay();
 	}
-});
+}, false);
 
 // This waits a set amount of time before adding a style to the nav when you press the button
 const overlayWait = async () => {
@@ -400,7 +434,7 @@ window.addEventListener('resize', () => {
 		document.querySelector(".breadcrumb").removeAttribute('style');
 		btnMaker();
 	}
-});
+}, false);
 
 // This is a delay that is used for animations
 const delay = (seconds) =>
@@ -413,6 +447,11 @@ const clearAll = (el) => {
 	while (el.firstChild) {
 		el.removeChild(el.firstChild);
 	}
+};
+
+// This scrolls to the top of the page when the user clicks a link
+const toTop = () => {
+	window.scrollTo(0, 0);
 };
 
 // This is a temporary content setup that covers the social and store pages
@@ -434,6 +473,7 @@ const standinSetup = (name) => {
 		`;
 	}
 	content.append(standin);
+	toTop();
 };
 
 // This is an idea I was testing but have left behind for now

@@ -22,12 +22,13 @@ html {
 }
 
 body {
-	margin: 0;
+	margin: 0 auto;
 	padding: 0;
 	background-color: #1B2021;
 	color: #F4F2F3;
 	font-family: 'Noto Sans', sans-serif;
 	min-width: 280px;
+	max-width: 1920px;
 }
 
 img {
@@ -62,7 +63,7 @@ header {
 	position: fixed;
 	top: 0;
 	height: 3em;
-	width: 100vw;
+	width: 100%;
 	min-width: 280px;
 	z-index: 1;
 	transition: 0.4s;
@@ -276,15 +277,45 @@ header {
 	padding-right: 1.4rem;
 }
 
-.bioLink {
-	height: 100%;
-	align-self: center;
-	padding-bottom: 0;
-}
-
 .linkSpan {
 	display: flex;
 	flex-direction: column;
+}
+
+.bioLink:last-of-type {
+	height: 100%;
+	align-self: center;
+}
+
+.bioLink:last-of-type {
+	padding-bottom: 0;
+}
+
+.socialIcon {
+	padding: 0;
+}
+
+.faqHeading {
+	margin-top: 0;
+}
+
+.faqDetails {
+	width: 80%;
+	margin: 0 auto 1.4em;
+	text-align: left;
+	padding: 1.4em;
+	border: 1px solid #ED1D20;
+	transition: 0.4s;
+}
+
+.faqSummary {
+	cursor: pointer;
+}
+
+.faqPara {
+	margin: 0;
+	padding: 1.4em 1.4em 0;
+	width: 80%;
 }
 
 /* Footer Styles */
@@ -366,7 +397,7 @@ footer li {
 	}
 	.headNav {
 		display: flex;
-		width: 85vw;
+		width: 85%;
 		background-color: #ED1D20;
 		display: block;
 	}
@@ -388,8 +419,9 @@ footer li {
 	.articlesContent,
 	.individualArticle,
 	.storeContent,
-	.socialContent {
-		margin-top: 0;
+	.socialContent,
+	.faqContent {
+		margin: 0;
 		padding: 1.4em 1.4em ;
 	}
 	.review {
@@ -402,7 +434,7 @@ footer li {
 		font-size: 2em;
 	}
 	.individualArticle {
-		width: 85vw;
+		width: 85%;
 		margin: 0 auto;
 	}
 	.bioTitle {
@@ -413,7 +445,7 @@ footer li {
 	}
 	/* Footer Styles */
 	.footNav {
-		width: 85vw;
+		width: 85%;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: row;
@@ -433,7 +465,7 @@ footer li {
 @media only screen and (min-width: 768px) {
 	/* Header Styles */
 	.headNav {
-		width: 70vw;
+		width: 70%;
 	}
 	/* Main Styles */
 	.review {
@@ -444,7 +476,7 @@ footer li {
 		margin: .4rem;
 	}
 	.individualArticle {
-		width: 70vw;
+		width: 70%;
 	}
 	.bioSection {
 		display: grid;
@@ -476,7 +508,7 @@ footer li {
 		min-height: calc(100vh - 950px);
 	}
 	.footNav {
-		width: 70vw;
+		width: 70%;
 	}
 }
 
@@ -531,21 +563,21 @@ footer li {
 @media only screen and (min-width: 1200px) {
 	/* Main Styles */
 	#allContent {
-		width: 90vw;
-		margin: auto;
+		width: 90%;
+		margin: 0 auto;
 	}
 }
 
 @media only screen and (min-width: 1440px) {
 	/* Main Styles */
 	#allContent {
-		width: 85vw;
+		width: 85%;
 	}
 }
 
 @media only screen and (min-width: 2560px) {
 	/* Main Styles */
 	#allContent {
-		width: 80vw;
+		width: 80%;
 	}
 }
