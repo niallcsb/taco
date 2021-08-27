@@ -303,18 +303,18 @@ header {
 	width: 80%;
 	margin: 0 auto 1.4em;
 	text-align: left;
-	padding: 1.4em;
 	border: 1px solid #ED1D20;
 	transition: 0.4s;
 }
 
 .faqSummary {
 	cursor: pointer;
+	padding: 1.4em;
 }
 
 .faqPara {
 	margin: 0;
-	padding: 1.4em 1.4em 0;
+	padding: 0 2.8em 1.4em;
 }
 
 /* Footer Styles */
