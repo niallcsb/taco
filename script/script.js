@@ -197,6 +197,8 @@ const bioSetup = (item) => {
 	bioImg.setAttribute("src", `${item.image}`);
 	bioImg.classList.add("bioImg");
 	bioImg.setAttribute("width", "100%");
+	bioImg.setAttribute("height", "100%");
+	bioImg.setAttribute("alt", "");
 	const bioBody = document.createElement("p");
 	bioBody.classList.add("bioBody");
 	bioBody.textContent = `${item.body}`;
@@ -209,6 +211,9 @@ const bioSetup = (item) => {
 		const socialIcon = document.createElement("img");
 		socialIcon.classList.add("socialIcon");
 		socialIcon.setAttribute("src", `${item.icon}`);
+		socialIcon.setAttribute("width", "32");
+		socialIcon.setAttribute("height", "32");
+		socialIcon.setAttribute("alt", "");
 		bioLink.append(socialIcon);
 		linkSpan.append(bioLink);
 	});
