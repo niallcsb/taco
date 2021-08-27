@@ -56,7 +56,7 @@ a:focus {
 
 /* Header Styles */
 
-header {
+.bodyHead {
 	background-color: #1B2021;
 	display: grid;
 	grid-template: 3em / repeat(5, 1fr);
@@ -106,12 +106,18 @@ header {
   text-transform: capitalize;
 }
 
+.bcNav {
+	display: none;
+	width: 100%;
+	padding-top: .4em;
+}
+
 .breadcrumb {
+	display: flex;
 	margin: 0 auto;
 	padding: 0;
 	width: 60%;
 	list-style: none;
-	display: none;
   text-transform: capitalize;
 }
 
@@ -319,12 +325,12 @@ header {
 
 /* Footer Styles */
 
-footer {
+.bodyFoot {
 	background-color: #3E4A51;
 	border-top: .1em solid #62747F;
 }
 
-footer li {
+.bodyFoot li {
 	padding-bottom: .4em;
 }
 
@@ -371,7 +377,7 @@ footer li {
 
 @media only screen and (min-width: 425px) {
 	/* Header Styles */
-	header {
+	.bodyHead {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
@@ -503,7 +509,7 @@ footer li {
 		grid-area: 4 / 2 / 5 / 5;
 	}
 	/* Footer Styles */
-	footer {
+	.bodyFoot {
 		min-height: calc(100vh - 950px);
 	}
 	.footNav {
@@ -513,7 +519,7 @@ footer li {
 
 @media only screen and (min-width: 1024px) {
 	/* Header Styles */
-	header {
+	.bodyHead {
 		height: 20vh;
 		max-height: 200px;
 	}

@@ -21,7 +21,9 @@ let btnStatus = true;
 
 // This populates the nav in the header
 const headerNav = () => {
-	const headNavList = document.querySelector(".headNavList");
+	const headNav = document.querySelector(".headNav");
+	const headNavList = document.createElement("ul");
+	headNavList.classList.add("headNavList");
 	navArray.forEach((item) => {
 		const headNavItem = document.createElement("li");
 		headNavItem.classList.add(`${item.className}`);
@@ -32,6 +34,7 @@ const headerNav = () => {
 		headNavItem.append(headNavLink);
 		headNavList.append(headNavItem);
 	});
+	headNav.append(headNavList);
 };
 
 // This populates the nave in the footer
@@ -267,8 +270,10 @@ const contentSetup = (name) => {
 // Add breadcrumbs to the nav
 // This function just resets the breadcrumbs
 const resetBreadcrumb = () => {
-	const breadcrumb = document.querySelector(".breadcrumb");
-	clearAll(breadcrumb);
+	const bcNav = document.querySelector(".bcNav");
+	const breadcrumb = document.createElement("ul");
+	breadcrumb.classList.add("breadcrumb");
+	clearAll(bcNav);
 	if (location.hash != "") {
 		const homeBcItem = document.createElement("li")
 		homeBcItem.classList.add("homeBcItem");
@@ -281,7 +286,8 @@ const resetBreadcrumb = () => {
 		bcArrow.textContent = ">";
 		homeBcItem.append(homeBcLink, bcArrow)
 		breadcrumb.append(homeBcItem);
-		breadcrumb.style.display = "flex";
+		bcNav.append(breadcrumb);
+		bcNav.style.display = "flex";
 	}
 };
 
@@ -439,7 +445,7 @@ window.addEventListener('resize', () => {
 		resetOverlay();
 		breadcrumbSetup();
 	} else if (windowWidth < 425) {
-		document.querySelector(".breadcrumb").removeAttribute('style');
+		document.querySelector(".bcNav").removeAttribute('style');
 		btnMaker();
 	}
 }, false);
