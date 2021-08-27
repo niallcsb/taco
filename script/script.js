@@ -112,7 +112,7 @@ const validator = () => {
 	locationString.forEach((item) => {
 		if (item === "faq") {
 			locationString[i] = "FAQ";
-		};
+		}
 		let initValidator = parseInt(item, 10);
 		if (Number.isFinite(initValidator) == true) {
 			validator = initValidator;
