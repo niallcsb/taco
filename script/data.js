@@ -154,9 +154,8 @@ const articleArray = [
 	)
 ];
 
-// Format some of the parameters in the objects.
 // Converts the month from a number to a string
-const monthString = function(date) {
+const monthString = (date) => {
 	let month;
 	switch (date.getMonth()) {
 		case 0:
@@ -199,6 +198,7 @@ const monthString = function(date) {
 	return month;
 };
 
+// Format some of the parameters in the objects.
 articleArray.forEach((item) => {
 	let urlUpdate = item.headline.replace(/\s/g,'').toLowerCase();
 	item.link = `#/articles/${item.id}/${urlUpdate}`;

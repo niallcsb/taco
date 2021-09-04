@@ -29,7 +29,7 @@ const headerNav = () => {
 		headNavItem.classList.add(`${item.className}`);
 		const headNavLink = document.createElement("a");
 		headNavLink.classList.add(`${item.className}Link`);
-		headNavLink.setAttribute("href", `${item.link}`);
+		headNavLink.href = item.link;
 		headNavLink.textContent = `${item.title}`;
 		headNavItem.append(headNavLink);
 		headNavList.append(headNavItem);
@@ -37,7 +37,7 @@ const headerNav = () => {
 	headNav.append(headNavList);
 };
 
-// This populates the nave in the footer
+// This populates the nav in the footer
 const footerNav = () => {
 	const footNav = document.querySelector(".footNav");
 	navArray.forEach((item) => {
@@ -45,11 +45,12 @@ const footerNav = () => {
 		footNavSection.classList.add("footNavSection");
 		const listTitle = document.createElement("a");
 		listTitle.classList.add("listTitle");
-		listTitle.setAttribute("href", `${item.link}`);
+		listTitle.href = item.link;
 		listTitle.textContent = `${item.title}`;
-		const footList = document.createElement("ul");
-		footList.classList.add("footList");
+		footNavSection.append(listTitle);
 		if (item.subLinks.length != 0) {
+			const footList = document.createElement("ul");
+			footList.classList.add("footList");
 			item.subLinks.forEach((item) => {
 				const footListItem = document.createElement("li");
 				if (Object.prototype.hasOwnProperty.call(item, "title")) {
@@ -60,14 +61,14 @@ const footerNav = () => {
 					footList.append(footListItem);
 				} else {
 					const footListLink = document.createElement("a");
-					footListLink.setAttribute("href", `${item.link}`);
+					footListLink.href = item.link;
 					footListLink.textContent = `${item.name}`;
 					footListItem.append(footListLink);
 					footList.append(footListItem);
 				}
+				footNavSection.append(footList);
 			});
 		}
-		footNavSection.append(listTitle, footList);
 		footNav.append(footNavSection);
 	});
 }
@@ -85,7 +86,7 @@ const arrayRefresh = (array) => {
 	array.forEach((item) => {
 		const reviewItem = document.createElement("a");
 		reviewItem.classList.add("reviewLink");
-		reviewItem.setAttribute("href", `${item.link}`);
+		reviewItem.href = item.link;
 		const reviewArticle = document.createElement("article");
 		reviewArticle.classList.add("review");
 		reviewArticle.setAttribute("style", `background-image:url(${item.image_169})`);
@@ -111,8 +112,7 @@ const arrayRefresh = (array) => {
 const validator = () => {
 	let locationString = location.hash.toString().substring(2).split('/');
 	let validator;
-	let i = 0;
-	locationString.forEach((item) => {
+	locationString.forEach((item, i) => {
 		if (item === "faq") {
 			locationString[i] = "FAQ";
 		}
@@ -120,7 +120,6 @@ const validator = () => {
 		if (Number.isFinite(initValidator) == true) {
 			validator = initValidator;
 		}
-		i++;
 	});
 	let validatedArticle = articleArray.find(({id}) => id == validator);
 	let returnResults = [validatedArticle, locationString];
@@ -207,7 +206,7 @@ const bioSetup = (item) => {
 	item.links.forEach((item) => {
 		const bioLink = document.createElement("a");
 		bioLink.classList.add("bioLink");
-		bioLink.setAttribute("href", `${item.link}`);
+		bioLink.href = item.link;
 		const socialIcon = document.createElement("img");
 		socialIcon.classList.add("socialIcon");
 		socialIcon.setAttribute("src", `${item.icon}`);
@@ -285,7 +284,7 @@ const resetBreadcrumb = () => {
 		const homeBcLink = document.createElement("a")
 		homeBcLink.classList.add("homeBcLink");
 		homeBcLink.textContent = "Home";
-		homeBcLink.setAttribute("href", "");
+		homeBcLink.href = "";
 		const bcArrow = document.createElement("p");
 		bcArrow.classList.add("bcArrow");
 		bcArrow.textContent = ">";
@@ -305,7 +304,7 @@ const bcPopulator = (array) => {
 		bcItem.classList.add(`${array[i]}BcItem`);
 		const bcLink = document.createElement("a");
 		bcLink.classList.add(`${array[i]}BcLink`);
-		bcLink.setAttribute("href", `#/${array[i]}`);
+		bcLink.href = `#/${array[i]}`;
 		bcLink.textContent = `${array[i]}`;
 		const bcArrow = document.createElement("p");
 		bcArrow.classList.add("bcArrow");
@@ -369,7 +368,6 @@ window.addEventListener('load', () => {
 	} else if (location.hash == "#/random") {
 		randomArticle();
 	} else if (location.hash == "#/faq") {
-		// standinSetup("faq");
 		contentSetup("faq");
 		faqSetup();
 	} else if (location.hash.includes("articles/")) {
@@ -484,11 +482,6 @@ const standinSetup = (name) => {
 		standin.innerHTML = `
 			<h1>Come back soon!</h1>
 			<p>All your taco related shopping needs will be available to you here. Possibly brought to you using Ruby On Rails, possibly not. Who knows?</p>
-		`;
-	} else if (name == "faq") {
-		standin.innerHTML = `
-			<h1>Come back soon!</h1>
-			<p>Answers to all your questions, stupid and smart will be here for you soon.</p>
 		`;
 	}
 	content.append(standin);
