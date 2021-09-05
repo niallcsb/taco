@@ -48,7 +48,7 @@ const footerNav = () => {
 		listTitle.href = item.link;
 		listTitle.textContent = `${item.title}`;
 		footNavSection.append(listTitle);
-		if (item.subLinks.length != 0) {
+		if (item.subLinks.length !== 0) {
 			const footList = document.createElement("ul");
 			footList.classList.add("footList");
 			item.subLinks.forEach((item) => {
@@ -284,7 +284,7 @@ const resetBreadcrumb = () => {
 		const homeBcLink = document.createElement("a")
 		homeBcLink.classList.add("homeBcLink");
 		homeBcLink.textContent = "Home";
-		homeBcLink.href = "";
+		homeBcLink.href = "./";
 		const bcArrow = document.createElement("p");
 		bcArrow.classList.add("bcArrow");
 		bcArrow.textContent = ">";
