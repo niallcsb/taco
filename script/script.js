@@ -26,7 +26,7 @@ const headerNav = () => {
 	headNavList.classList.add("headNavList");
 	navArray.forEach((item) => {
 		const headNavItem = document.createElement("li");
-		headNavItem.classList.add(`${item.className}`);
+		headNavItem.classList.add("headNavItem",`${item.className}`);
 		const headNavLink = document.createElement("a");
 		headNavLink.classList.add(`${item.className}Link`);
 		headNavLink.href = item.link;
@@ -53,6 +53,7 @@ const footerNav = () => {
 			footList.classList.add("footList");
 			item.subLinks.forEach((item) => {
 				const footListItem = document.createElement("li");
+				footListItem.classList.add("footListItem");
 				if (Object.prototype.hasOwnProperty.call(item, "title")) {
 					const listItemTitle = document.createElement("h4");
 					listItemTitle.classList.add("subLinkTitle");
@@ -141,7 +142,7 @@ const articleSetup = (id = validator()[0]) => {
 	articleImg.setAttribute("width", "100%");
 	articleImg.setAttribute("alt", "");
 	const articleCaption = document.createElement("figcaption");
-	articleCaption.classList.add("figcaption");
+	articleCaption.classList.add("articleCaption");
 	articleCaption.textContent = `${id.caption}`;
 	articleFigure.append(articleImg, articleCaption);
 	const articleHeading = document.createElement("span");
@@ -284,7 +285,7 @@ const resetBreadcrumb = () => {
 		const homeBcLink = document.createElement("a")
 		homeBcLink.classList.add("homeBcLink");
 		homeBcLink.textContent = "Home";
-		homeBcLink.href = "./";
+		homeBcLink.href = "/";
 		const bcArrow = document.createElement("p");
 		bcArrow.classList.add("bcArrow");
 		bcArrow.textContent = ">";
@@ -394,7 +395,6 @@ window.addEventListener('hashchange', () => {
 	} else if (location.hash == "#/random") {
 		randomArticle();
 	} else if (location.hash == "#/faq") {
-		// standinSetup("faq");
 		contentSetup("faq");
 		faqSetup();
 	} else if (location.hash == "") {
